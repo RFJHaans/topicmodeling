@@ -38,7 +38,7 @@ Code prepared on May 10, 2017 by Richard Haans (haans@rsm.nl).
 Data obtained on May 10th using http://www.trumptwitterarchive.com/
 
 ### Package installation
-**Input:**
+
 ```Rscript
 # The "tm" package enables the text mining infrastructure that we will use for LDA.
     if (!require("tm")) install.packages("tm")
@@ -52,7 +52,7 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
 ```
 
 ### Get the data, turn into a corpus, and clean it up
-**Input:**
+
 ```Rscript
 ### Load data from a URL
     data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/trumptweets.csv"))
@@ -119,8 +119,7 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
     dtm = DocumentTermMatrix(corpusclean)  
     dtm
 ```
-
-**Output:**
+Output:
 ```Ruby
 <<DocumentTermMatrix (documents: 4037, terms: 8799)>>
 Non-/sparse entries: 36042/35485521
@@ -128,7 +127,7 @@ Sparsity           : 100%
 Maximal term length: 35
 Weighting          : term frequency (tf)
 ```
-**Input:**
+
 ```Rscript
 # dtms are organized with rows being documents and columns being the unique words.
 # We can see here that the longest word in the corpus is 35 characters long.
@@ -137,8 +136,7 @@ Weighting          : term frequency (tf)
 # Let's check out the first two tweets in our data (rows in the DTM) and the 250th to 300th words:
     inspect(dtm[1:2,250:300])
 ```
-
-**Output:**
+Output:
 ```Ruby
     Terms
 Docs another answer answered answering answers anthony anti antia
@@ -149,7 +147,7 @@ Docs anticatholic anticipated
    1            0           0
    2            0           0
 ```
-**Input:**
+
 ```Rscript
 # These two tweets do not contain any of the listed words (all values are zero).
 
@@ -159,14 +157,12 @@ Docs anticatholic anticipated
 # This sums up the total number of words in each of the documents, e.g.:
     rowTotals[1:10]
 ```
-
-**Output:**
+Output:
 ```Ruby
  1  2  3  4  5  6  7  8  9 10 
  4 11 12 10  6  6  5 12  9 10
 ```
 
-**Input:**
 ```Rscript
 # shows the number of words for the first ten tweets.
 
@@ -174,8 +170,7 @@ Docs anticatholic anticipated
     dtm = dtm[rowTotals> 0, ]
     dtm
 ```
-
-**Output:**
+Output:
 ```Ruby
 <<DocumentTermMatrix (documents: 4028, terms: 8799)>>
 Non-/sparse entries: 36042/35406330
@@ -183,7 +178,7 @@ Sparsity           : 100%
 Maximal term length: 35
 Weighting          : term frequency (tf)
 ```
-**Input:**
+
 ```Rscript
 # As we can see, some documents have been removed: there are 4028 tweets left.  
 ```
