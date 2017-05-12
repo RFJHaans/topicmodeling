@@ -408,7 +408,7 @@ In this example, I use the VEM algorithm to estimate the topic model. Note that 
 ### Using the topic model output: predict Android tweets
 We will use the most important topics for each tweet to see if it can predict whether or not the tweet was sent from an Android device. 
 See, for example: https://www.theatlantic.com/technology/archive/2017/03/trump-android-tweets/520869/
-This would suggest that "real" Trump tweets may be coming from an Android device, and differing topic usage may indicate that the tweets are coming from different sources (Trump versus his team, using non-Android devices). 
+This would suggest that "real" Trump tweets may be coming from an Android device, and differing topic usage across platforms may indicate that the tweets are coming from different sources (Trump, using Android, versus his team, using non-Android devices). 
 
 We estimate a logit model to predict this outcome, with dummies for every topic. 
 ```Rscript
@@ -502,7 +502,8 @@ We will focus on the significant topics.
  [7,] "tuesday"          "atmikepence" "next"                  "center"       "hashtagrncincle"  
  [8,] "continue"         "wins"        "event"                 "seen"         "despite"          
  [9,] "atgreta"          "maine"       "team"                  "west"         "choice"           
-[10,] "respect"          "rapids"      "taking"                "friday"       "started"          
+[10,] "respect"          "rapids"      "taking"                "friday"       "started" 
+
       Topic 16           Topic 25     Topic 30                Topic 31      Topic 40             
  [1,] "hashtagvotetrump" "can"        "support"               "hampshire"   "carolina"           
  [2,] "even"             "campaign"   "lets"                  "ratings"     "hashtagamericafirst"
@@ -513,7 +514,8 @@ We will focus on the significant topics.
  [7,] "bush"             "washington" "house"                 "hashtagfitn" "every"              
  [8,] "worse"            "anything"   "defeat"                "questions"   "plan"               
  [9,] "endorsed"         "funding"    "white"                 "woman"       "expected"           
-[10,] "truly"            "self"       "behind"                "thats"       "httpstcokwolibaw"   
+[10,] "truly"            "self"       "behind"                "thats"       "httpstcokwolibaw"  
+
       Topic 42       Topic 49    
  [1,] "iowa"         "president" 
  [2,] "florida"      "going"     
@@ -547,4 +549,4 @@ So it seems that tweets not from Android tend to be rally-related or more genera
  [9,] "temperament" "dollars"  
 [10,] "serious"     "home" 
 ```
-In contrast—if Trump indeed tends to be the source of Android-based tweets—tweets from Android devices focus heavily on Hillary Clinton.
+In contrast tweets from Android devices focus heavily on Hillary Clinton. Are these tweets coming more directly from Trump?
