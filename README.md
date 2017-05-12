@@ -38,11 +38,11 @@ Code prepared on May 10, 2017 by Richard Haans (haans@rsm.nl).
 Data obtained on May 10th using http://www.trumptwitterarchive.com/
 
 ### Package installation
-# The "tm" package enables the text mining infrastructure that we will use for LDA.
+## The "tm" package enables the text mining infrastructure that we will use for LDA.
 if (!require("tm")) install.packages("tm")
-# The "topicmodels" package enables LDA analysis.
+## The "topicmodels" package enables LDA analysis.
 if (!require("topicmodels")) install.packages("topicmodels")
-# The cluster package and igraph package will be used at the end of this code.
+## The cluster package and igraph package will be used at the end of this code.
 if (!require("cluster")) install.packages("cluster")
 if (!require("igraph")) install.packages("igraph")
 
