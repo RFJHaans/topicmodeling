@@ -116,12 +116,33 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
 # We then convert the corpus to a "Document-term-matrix" (dtm)
     dtm = DocumentTermMatrix(corpusclean)  
     dtm
+```
+```
+<<DocumentTermMatrix (documents: 4037, terms: 8799)>>
+Non-/sparse entries: 36042/35485521
+Sparsity           : 100%
+Maximal term length: 35
+Weighting          : term frequency (tf)
+```
+```Rscript
 # dtms are organized with rows being documents and columns being the unique words.
 # We can see here that the longest word in the corpus is 35 characters long.
 # There are 4037 documents, containing 8799 unique words.
 
 # Let's check out the first two tweets in our data (rows in the DTM) and the 250th to 300th words:
     inspect(dtm[1:2,250:300])
+```
+```
+    Terms
+Docs another answer answered answering answers anthony anti antia
+   1       0      0        0         0       0       0    0     0
+   2       0      0        0         0       0       0    0     0
+    Terms
+Docs anticatholic anticipated
+   1            0           0
+   2            0           0
+```
+```Rscript
 # These two tweets do not contain any of the listed words (all values are zero).
 
 # The step below is done to ensure that after removing various words, no documents are left empty 
@@ -129,10 +150,25 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
     rowTotals = apply(dtm , 1, sum)
 # This sums up the total number of words in each of the documents, e.g.:
     rowTotals[1:10]
+```
+```
+ 1  2  3  4  5  6  7  8  9 10 
+ 4 11 12 10  6  6  5 12  9 10
+```
+```Rscript
 # shows the number of words for the first ten tweets.
 
 # Then, we keep only those documents where the sum of words is greater than zero.
     dtm = dtm[rowTotals> 0, ]
     dtm
+```
+```
+<<DocumentTermMatrix (documents: 4028, terms: 8799)>>
+Non-/sparse entries: 36042/35406330
+Sparsity           : 100%
+Maximal term length: 35
+Weighting          : term frequency (tf)
+```
+```Rscript
 # As we can see, some documents have been removed: there are 4028 tweets left.  
 ```
