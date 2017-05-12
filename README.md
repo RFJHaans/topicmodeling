@@ -550,3 +550,23 @@ So it seems that tweets not from Android tend to be rally-related or more genera
 [10,] "serious"     "home" 
 ```
 In contrast tweets from Android devices focus heavily on Hillary Clinton. Are these tweets coming more directly from Trump?
+
+### Using the topic model: Clustering similar tweets
+Here, we will create a distance measure based on the topic loadings for each tweet, and create a networked overview of highly similar tweets. 
+```Rscript
+# Create a distance measure using basic euclidean distance, chosen for simplicity
+    cluster_gammas =  as.matrix(daisy(gammaDF_LDA50[,1:50], metric =  "euclidean", stand = TRUE))
+
+# Change row values to zero if less than row mean minus 2.5 row standard deviations
+# This is done to prevent an extremely dense network.
+# The value 2.5 is chosen solely for illustrative purposes (it leads to the nicest graph)
+# Credit: http://stackoverflow.com/a/16047196/1036500
+
+    cluster_gammas[ sweep(cluster_gammas, 1, (apply(cluster_gammas,1,mean) - 2.5* apply(cluster_gammas,1,sd) )) > 0 ] = 0
+    cluster_gammas[ cluster_gammas > 0 ] = 1
+
+    g = as.undirected(graph.adjacency(cluster_gammas))
+
+    plot(g, edge.curved = TRUE, vertex.color= "black", vertex.label = NA,vertex.size = 1)
+```
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/network.png)
