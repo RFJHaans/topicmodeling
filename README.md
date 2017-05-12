@@ -114,7 +114,7 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
 # This subsets the corpus into Android-origin tweets, and other tweets, based on the "android" metadata
 
 # We then convert the corpus to a "Document-term-matrix" (dtm)
-    dtm =-DocumentTermMatrix(corpusclean)  
+    dtm = DocumentTermMatrix(corpusclean)  
     dtm
 # dtms are organized with rows being documents and columns being the unique words.
 # We can see here that the longest word in the corpus is 35 characters long.
