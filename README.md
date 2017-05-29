@@ -276,131 +276,228 @@ Time difference of 11.29924 secs
 ```
 
 ```Ruby  
-      Topic 1         Topic 2          Topic 3     Topic 4        Topic 5        Topic 6        Topic 7          Topic 8           Topic 9         Topic 10        Topic 11         Topic 12     
- [1,] "efforts"       "social"         "family"    "experience"   "embeddedness" "ceo"          "control"        "relationship"    "incentives"    "cognitive"     "communication"  "strategic"  
- [2,] "organizations" "exchange"       "venture"   "learning"     "network"      "ceos"         "organizational" "strategy"        "value"         "capabilities"  "processes"      "knowledge"  
- [3,] "activities"    "justice"        "control"   "performance"  "knowledge"    "support"      "attention"      "country"         "network"       "processes"     "process"        "public"     
- [4,] "work"          "perceptions"    "markets"   "prior"        "countries"    "corporate"    "organizations"  "partners"        "relationships" "control"       "coordination"   "political"  
- [5,] "behavioral"    "behavior"       "ownership" "relational"   "transfer"     "management"   "technology"     "characteristics" "formal"        "managerial"    "organizational" "private"    
-
-       Topic 13     Topic 14        Topic 15       Topic 16         Topic 17       Topic 18              Topic 19        Topic 20         Topic 21       Topic 22     Topic 23        Topic 24     
- [1,] "market"     "events"        "team"         "change"         "knowledge"    "organizational"      "exit"          "team"           "performance"  "technology" "process"       "innovation" 
- [2,] "value"      "across"        "creativity"   "institutional"  "innovation"   "organizations"       "work"          "structure"      "social"       "knowledge"  "organizations" "corporate"  
- [3,] "growth"     "influence"     "teams"        "field"          "external"     "prior"               "analysts"      "exchange"       "diversity"    "initial"    "attention"     "network"    
- [4,] "negative"   "positive"      "individual"   "actors"         "creativity"   "search"              "boundary"      "learning"       "relationship" "learning"   "activities"    "product"    
- [5,] "will"       "focus"         "member"       "organizational" "ties"         "relationship"        "types"         "relationship"   "team"         "capacity"   "entrepreneurs" "industry"   
-
-       Topic 25         Topic 26       Topic 27     Topic 28         Topic 29        Topic 30     Topic 31         Topic 32     Topic 33      Topic 34      Topic 35         Topic 36     
- [1,] "control"        "target"       "experience" "organizational" "knowledge"     "collective" "employees"      "network"    "ties"        "performance" "attention"      "mechanisms" 
- [2,] "organizational" "acquisition"  "role"       "units"          "innovation"    "community"  "work"           "ties"       "networks"    "exploration" "theory"         "theoretical"
- [3,] "acquisitions"   "acquisitions" "process"    "unit"           "challenges"    "management" "employee"       "networks"   "choices"     "search"      "organizations"  "different"  
- [4,] "performance"    "market"       "groups"     "strategies"     "many"          "context"    "time"           "social"     "executives"  "problem"     "organizational" "orientation"
- [5,] "managerial"     "focal"        "knowledge"  "relationship"   "form"          "knowledge"  "related"        "structure"  "make"        "information" "processes"      "strategies" 
-
-       Topic 37     Topic 38           Topic 39        Topic 40       Topic 41         Topic 42         Topic 43         Topic 44         Topic 45      Topic 46         Topic 47         
- [1,] "media"      "employee"         "performance"   "social"       "leadership"     "events"         "mechanisms"     "organizational" "integration" "knowledge"      "strategy"       
- [2,] "voice"      "entrepreneurship" "relationships" "performance"  "behaviors"      "organizational" "organizations"  "theory"         "capital"     "transfer"       "fit"            
- [3,] "product"    "knowledge"        "ceo"           "justice"      "leaders"        "work"           "theory"         "routines"       "boundaries"  "network"        "past"           
- [4,] "managerial" "events"           "influence"     "diversity"    "work"           "framework"      "agency"         "business"       "process"     "boundary"       "innovation"     
- [5,] "control"    "behavior"         "types"         "corporate"    "performance"    "creative"       "organizational" "capabilities"   "innovation"  "organizational" "develop"        
-
-       Topic 48         Topic 49        Topic 50       Topic 51        Topic 52        Topic 53      Topic 54         Topic 55         Topic 56         Topic 57         Topic 58          
- [1,] "learning"       "innovation"    "market"       "performance"   "ties"          "networks"    "identity"       "organizational" "social"         "complexity"     "uncertainty"     
- [2,] "organizational" "technology"    "governance"   "product"       "logics"        "network"     "identities"     "risk"           "theory"         "task"           "different"       
- [3,] "value"          "network"       "capabilities" "strategic"     "building"      "groups"      "organizational" "social"         "models"         "organizational" "choice"          
- [4,] "theory"         "organizations" "companies"    "development"   "market"        "group"       "work"           "making"         "organizations"  "degree"         "governance"      
- [5,] "processes"      "networks"      "executives"   "case"          "categories"    "ties"        "individuals"    "perspective"    "institutional"  "complex"        "structure"       
-
-       Topic 59         Topic 60      Topic 61        Topic 62     Topic 63          Topic 64        Topic 65        Topic 66       Topic 67        Topic 68      Topic 69      Topic 70    
- [1,] "strategy"       "feedback"    "entry"         "power"      "team"            "institutional" "different"     "performance"  "performance"   "activities"  "performance" "work"      
- [2,] "affect"         "performance" "industry"      "source"     "entrepreneurial" "local"         "argue"         "coordination" "social"        "performance" "leader"      "change"    
- [3,] "management"     "creative"    "technologies"  "ownership"  "teams"           "logics"        "performance"   "team"         "capabilities"  "learning"    "negative"    "action"    
- [4,] "top"            "workers"     "power"         "theory"     "changes"         "search"        "among"         "teams"        "quality"       "activity"    "actions"     "mechanisms"
- [5,] "role"           "internal"    "business"      "management" "products"        "investment"    "private"       "management"   "status"        "patterns"    "theory"      "practices" 
-
-       Topic 71         Topic 72       Topic 73         Topic 74        Topic 75      Topic 76         Topic 77      Topic 78      Topic 79        Topic 80        Topic 81       Topic 82         
- [1,] "information"    "search"       "voice"          "institutional" "women"       "organizations"  "decision"    "turnover"    "design"        "communication" "job"          "pay"            
- [2,] "social"         "likelihood"   "workplace"      "institutions"  "men"         "organizational" "making"      "performance" "products"      "team"          "satisfaction" "managers"       
- [3,] "status"         "engagement"   "employees"      "business"      "gender"      "success"        "ethical"     "job"         "technological" "members"       "relationship" "corporate"      
- [4,] "within"         "joint"        "outcomes"       "countries"     "social"      "framework"      "group"       "employees"   "product"       "managers"      "turnover"     "social"         
- [5,] "individuals"    "models"       "identification" "ownership"     "differences" "strategy"       "process"     "theory"      "industry"      "teams"         "individual"   "discuss"        
-
-       Topic 83           Topic 84      Topic 85         Topic 86         Topic 87     Topic 88      Topic 89     Topic 90        Topic 91     Topic 92        Topic 93      Topic 94         
- [1,] "logic"            "employees"   "organizational" "institutional"  "alliances"  "market"      "industry"   "market"        "directors"  "entrepreneurs" "team"        "theory"         
- [2,] "field"            "performance" "employee"       "differences"    "knowledge"  "ties"        "corporate"  "product"       "board"      "information"   "teams"       "practice"       
- [3,] "organizations"    "likely"      "employees"      "environments"   "governance" "value"       "ventures"   "complementary" "boards"     "product"       "members"     "characteristics"
- [4,] "social"           "negative"    "individuals"    "theory"         "reputation" "exit"        "venture"    "knowledge"     "corporate"  "search"        "time"        "process"        
- [5,] "logics"           "job"         "leadership"     "legitimacy"     "alliance"   "form"        "reputation" "exploration"   "governance" "actions"       "motivation"  "organizational" 
-
-       Topic 95         Topic 96        Topic 97              Topic 98       Topic 99         Topic 100     Topic 101   Topic 102        Topic 103       Topic 104     Topic 105     
- [1,] "organizational" "creative"      "learning"            "decision"     "organizational" "ceos"        "parties"   "corporate"      "capability"    "projects"    "work"        
- [2,] "theory"         "decisions"     "foreign"             "makers"       "work"           "ceo"         "third"     "organizational" "capabilities"  "within"      "interactions"
- [3,] "executives"     "managers"      "entry"               "performance"  "trust"          "will"        "positive"  "managers"       "dynamic"       "theory"      "online"      
- [4,] "employee"       "strategic"     "industry"            "information"  "institutional"  "performance" "perceived" "attention"      "development"   "investments" "team"        
- [5,] "units"          "relational"    "interorganizational" "strategic"    "peers"          "theory"      "social"    "industries"     "resources"     "economic"    "coordination"
-
-       Topic 106         Topic 107        Topic 108         Topic 109     Topic 110     Topic 111          Topic 112        Topic 113        Topic 114       Topic 115    Topic 116        
- [1,] "performance"     "logics"         "performance"     "networks"    "performance" "industry"         "theory"         "attention"      "women"         "innovation" "work"           
- [2,] "costs"           "institutional"  "managers"        "network"     "status"      "behavioral"       "management"     "organizational" "gender"        "industry"   "framework"      
- [3,] "diversification" "organizational" "among"           "social"      "groups"      "learning"         "theories"       "evolution"      "men"           "business"   "dimensions"     
- [4,] "search"          "different"      "decisions"       "entry"       "group"       "subsequent"       "framework"      "capabilities"   "employees"     "capital"    "within"         
- [5,] "market"          "outcomes"       "projects"        "structure"   "work"        "acquisition"      "approach"       "management"     "psychological" "target"     "understanding"  
-
-       Topic 117         Topic 118        Topic 119        Topic 120    Topic 121        Topic 122        Topic 123        Topic 124        Topic 125       Topic 126             Topic 127    
- [1,] "diversification" "development"    "organizations"  "alliance"   "status"         "status"         "decisions"      "knowledge"      "institutional" "exchange"            "csr"        
- [2,] "international"   "organizational" "community"      "alliances"  "performance"    "market"         "regulatory"     "performance"    "capabilities"  "partners"            "ceos"       
- [3,] "relationship"    "justice"        "relationships"  "partners"   "negative"       "positive"       "institutional"  "capabilities"   "reputation"    "relationships"       "political"  
- [4,] "financial"       "routines"       "organizational" "prior"      "individuals"    "organization"   "differences"    "external"       "complexity"    "social"              "corporate"  
- [5,] "product"         "time"           "social"         "within"     "social"         "reputation"     "foreign"        "learning"       "decision"      "prior"               "stakeholder"
-
-       Topic 128        Topic 129         Topic 130        Topic 131       Topic 132     Topic 133      Topic 134     Topic 135   Topic 136      Topic 137        Topic 138   Topic 139     
- [1,] "learning"       "conflict"        "performance"    "social"        "performance" "capabilities" "innovation"  "target"    "family"       "capital"        "alliance"  "ideas"       
- [2,] "organizations"  "focus"           "decision"       "women"         "approaches"  "market"       "performance" "strategy"  "strategic"    "human"          "alliances" "diversity"   
- [3,] "organizational" "experience"      "makers"         "men"           "resources"   "markets"      "financial"   "first"     "behavioral"   "categories"     "partners"  "investments" 
- [4,] "collective"     "regulatory"      "context"        "organization"  "competitive" "likely"       "knowledge"   "corporate" "management"   "market"         "learning"  "group"       
- [5,] "status"         "process"         "employees"      "interactions"  "empirical"   "costs"        "changes"     "type"      "strategy"     "employee"       "value"     "creative"    
-
-       Topic 140       Topic 141        Topic 142     Topic 143       Topic 144         Topic 145       Topic 146       Topic 147     Topic 148        Topic 149        Topic 150      
- [1,] "work"          "corporate"      "work"        "groups"        "teams"           "behavioral"    "across"        "performance" "ethical"        "acquisition"    "focus"        
- [2,] "control"       "governance"     "support"     "power"         "services"        "family"        "external"      "members"     "moral"          "growth"         "international"
- [3,] "system"        "stakeholders"   "develop"     "financial"     "strategic"       "superior"      "collaboration" "collective"  "organizations"  "risk"           "ceos"         
- [4,] "resources"     "organizational" "cognitive"   "group"         "diverse"         "strategy"      "practices"     "family"      "influence"      "market"         "performance"  
- [5,] "organizations" "framework"      "role"        "business"      "diversity"       "performance"   "levels"        "individual"  "leadership"     "test"           "early"        
-
-       Topic 151         Topic 152     Topic 153       Topic 154        Topic 155      Topic 156        Topic 157       Topic 158     Topic 159     Topic 160        Topic 161     Topic 162     
- [1,] "analysts"        "social"      "job"           "cultural"       "field"        "knowledge"      "opportunities" "business"    "options"     "technology"     "types"       "social"      
- [2,] "diversification" "individuals" "search"        "organizational" "theory"       "management"     "process"       "diversity"   "performance" "learning"       "positive"    "markets"     
- [3,] "competitive"     "role"        "jobs"          "organization"   "innovations"  "learning"       "sources"       "positive"    "technology"  "organizational" "concept"     "online"      
- [4,] "future"          "influence"   "performance"   "practices"      "capabilities" "organizational" "within"        "core"        "logic"       "experiences"    "better"      "behaviors"   
- [5,] "status"          "managers"    "organizations" "organizations"  "capital"      "routines"       "external"      "managerial"  "markets"     "knowledge"      "used"        "community"   
-
-       Topic 163      Topic 164      Topic 165      Topic 166       Topic 167     Topic 168    Topic 169          Topic 170        Topic 171        Topic 172       Topic 173        Topic 174    
- [1,] "development"  "performance"  "ceo"          "decisions"     "values"      "jobs"       "institutional"    "fit"            "organizational" "network"       "performance"    "resource"   
- [2,] "power"        "social"       "compensation" "time"          "performance" "dependence" "entrepreneurship" "performance"    "adoption"       "collaboration" "organizational" "market"     
- [3,] "technologies" "companies"    "directors"    "experience"    "work"        "power"      "organizational"   "services"       "practice"       "actors"        "organizations"  "performance"
- [4,] "positive"     "economic"     "outside"      "influence"     "management"  "job"        "innovation"       "institutional"  "status"         "knowledge"     "individuals"    "governance" 
- [5,] "address"      "relationship" "risk"         "communication" "identity"    "theory"     "analysts"         "products"       "organizations"  "social"        "innovation"     "political"  
-
-Topic 175       Topic 176     Topic 177       Topic 178        Topic 179     Topic 180     Topic 181       Topic 182       Topic 183        Topic 184     Topic 185         Topic 186       
- [1,] "environmental" "decision"    "activities"    "organizational" "benefits"    "leadership"  "resources"     "team"          "strategic"      "business"    "employees"       "organizational"
- [2,] "teams"         "knowledge"   "dependence"    "managers"       "strategy"    "leaders"     "institutional" "creative"      "actions"        "systems"     "behaviors"       "organizations" 
- [3,] "team"          "decisions"   "investment"    "identification" "context"     "theory"      "market"        "innovation"    "network"        "existing"    "opportunities"   "forms"         
- [4,] "performance"   "making"      "communication" "members"        "mechanisms"  "behavior"    "complementary" "development"   "actors"         "relational"  "opportunity"     "practices"     
- [5,] "information"   "foreign"     "social"        "social"         "performance" "leader"      "context"       "knowledge"     "organizational" "investment"  "voice"           "organization"  
-
-       Topic 187       Topic 188        Topic 189        Topic 190     Topic 191     Topic 192       Topic 193      Topic 194        Topic 195        Topic 196      Topic 197        Topic 198    
- [1,] "relationship"  "organizational" "change"         "value"       "market"      "work"          "performance"  "identity"       "team"           "influence"    "groups"         "group"      
- [2,] "political"     "innovation"     "strategic"      "performance" "competitive" "ties"          "business"     "organizational" "members"        "political"    "online"         "routines"   
- [3,] "psychological" "technology"     "organizational" "competitive" "industry"    "relationships" "unit"         "identification" "among"          "association"  "routines"       "ties"       
- [4,] "need"          "technological"  "develop"        "strategy"    "advantage"   "strategies"    "leadership"   "social"         "performance"    "performance"  "competition"    "identity"   
- [5,] "professional"  "will"           "distinct"       "advantage"   "resource"    "outcomes"      "team"         "organizations"  "teams"          "public"       "innovation"     "groups"     
-
-       Topic 199       Topic 200    
- [1,] "resources"     "knowledge"  
- [2,] "resource"      "field"      
- [3,] "portfolio"     "practice"   
- [4,] "value"         "personal"   
- [5,] "communication" "differences"
+      Topic 1         Topic 2          Topic 3     Topic 4        Topic 5        Topic 6       
+ [1,] "efforts"       "social"         "family"    "experience"   "embeddedness" "ceo"         
+ [2,] "organizations" "exchange"       "venture"   "learning"     "network"      "ceos"        
+ [3,] "activities"    "justice"        "control"   "performance"  "knowledge"    "support"     
+ [4,] "work"          "perceptions"    "markets"   "prior"        "countries"    "corporate"   
+ [5,] "behavioral"    "behavior"       "ownership" "relational"   "transfer"     "management"  
+      Topic 7          Topic 8           Topic 9         Topic 10        Topic 11        
+ [1,] "control"        "relationship"    "incentives"    "cognitive"     "communication" 
+ [2,] "organizational" "strategy"        "value"         "capabilities"  "processes"     
+ [3,] "attention"      "country"         "network"       "processes"     "process"       
+ [4,] "organizations"  "partners"        "relationships" "control"       "coordination"  
+ [5,] "technology"     "characteristics" "formal"        "managerial"    "organizational"
+      Topic 12      Topic 13     Topic 14        Topic 15       Topic 16         Topic 17      
+ [1,] "strategic"   "market"     "events"        "team"         "change"         "knowledge"   
+ [2,] "knowledge"   "value"      "across"        "creativity"   "institutional"  "innovation"  
+ [3,] "public"      "growth"     "influence"     "teams"        "field"          "external"    
+ [4,] "political"   "negative"   "positive"      "individual"   "actors"         "creativity"  
+ [5,] "private"     "will"       "focus"         "member"       "organizational" "ties"        
+      Topic 18              Topic 19        Topic 20         Topic 21       Topic 22    
+ [1,] "organizational"      "exit"          "team"           "performance"  "technology"
+ [2,] "organizations"       "work"          "structure"      "social"       "knowledge" 
+ [3,] "prior"               "analysts"      "exchange"       "diversity"    "initial"   
+ [4,] "search"              "boundary"      "learning"       "relationship" "learning"  
+ [5,] "relationship"        "types"         "relationship"   "team"         "capacity"  
+      Topic 23        Topic 24      Topic 25         Topic 26       Topic 27     Topic 28        
+ [1,] "process"       "innovation"  "control"        "target"       "experience" "organizational"
+ [2,] "organizations" "corporate"   "organizational" "acquisition"  "role"       "units"         
+ [3,] "attention"     "network"     "acquisitions"   "acquisitions" "process"    "unit"          
+ [4,] "activities"    "product"     "performance"    "market"       "groups"     "strategies"    
+ [5,] "entrepreneurs" "industry"    "managerial"     "focal"        "knowledge"  "relationship"  
+      Topic 29        Topic 30     Topic 31         Topic 32     Topic 33      Topic 34     
+ [1,] "knowledge"     "collective" "employees"      "network"    "ties"        "performance"
+ [2,] "innovation"    "community"  "work"           "ties"       "networks"    "exploration"
+ [3,] "challenges"    "management" "employee"       "networks"   "choices"     "search"     
+ [4,] "many"          "context"    "time"           "social"     "executives"  "problem"    
+ [5,] "form"          "knowledge"  "related"        "structure"  "make"        "information"
+      Topic 35         Topic 36      Topic 37     Topic 38           Topic 39       
+ [1,] "attention"      "mechanisms"  "media"      "employee"         "performance"  
+ [2,] "theory"         "theoretical" "voice"      "entrepreneurship" "relationships"
+ [3,] "organizations"  "different"   "product"    "knowledge"        "ceo"          
+ [4,] "organizational" "orientation" "managerial" "events"           "influence"    
+ [5,] "processes"      "strategies"  "control"    "behavior"         "types"        
+      Topic 40       Topic 41         Topic 42         Topic 43         Topic 44        
+ [1,] "social"       "leadership"     "events"         "mechanisms"     "organizational"
+ [2,] "performance"  "behaviors"      "organizational" "organizations"  "theory"        
+ [3,] "justice"      "leaders"        "work"           "theory"         "routines"      
+ [4,] "diversity"    "work"           "framework"      "agency"         "business"      
+ [5,] "corporate"    "performance"    "creative"       "organizational" "capabilities"  
+      Topic 45      Topic 46         Topic 47          Topic 48         Topic 49       
+ [1,] "integration" "knowledge"      "strategy"        "learning"       "innovation"   
+ [2,] "capital"     "transfer"       "fit"             "organizational" "technology"   
+ [3,] "boundaries"  "network"        "past"            "value"          "network"      
+ [4,] "process"     "boundary"       "innovation"      "theory"         "organizations"
+ [5,] "innovation"  "organizational" "develop"         "processes"      "networks"     
+      Topic 50       Topic 51        Topic 52        Topic 53      Topic 54        
+ [1,] "market"       "performance"   "ties"          "networks"    "identity"      
+ [2,] "governance"   "product"       "logics"        "network"     "identities"    
+ [3,] "capabilities" "strategic"     "building"      "groups"      "organizational"
+ [4,] "companies"    "development"   "market"        "group"       "work"          
+ [5,] "executives"   "case"          "categories"    "ties"        "individuals"   
+      Topic 55         Topic 56         Topic 57         Topic 58           Topic 59        
+ [1,] "organizational" "social"         "complexity"     "uncertainty"      "strategy"      
+ [2,] "risk"           "theory"         "task"           "different"        "affect"        
+ [3,] "social"         "models"         "organizational" "choice"           "management"    
+ [4,] "making"         "organizations"  "degree"         "governance"       "top"           
+ [5,] "perspective"    "institutional"  "complex"        "structure"        "role"          
+      Topic 60      Topic 61        Topic 62     Topic 63          Topic 64        Topic 65       
+ [1,] "feedback"    "entry"         "power"      "team"            "institutional" "different"    
+ [2,] "performance" "industry"      "source"     "entrepreneurial" "local"         "argue"        
+ [3,] "creative"    "technologies"  "ownership"  "teams"           "logics"        "performance"  
+ [4,] "workers"     "power"         "theory"     "changes"         "search"        "among"        
+ [5,] "internal"    "business"      "management" "products"        "investment"    "private"      
+      Topic 66       Topic 67        Topic 68      Topic 69      Topic 70     Topic 71        
+ [1,] "performance"  "performance"   "activities"  "performance" "work"       "information"   
+ [2,] "coordination" "social"        "performance" "leader"      "change"     "social"        
+ [3,] "team"         "capabilities"  "learning"    "negative"    "action"     "status"        
+ [4,] "teams"        "quality"       "activity"    "actions"     "mechanisms" "within"        
+ [5,] "management"   "status"        "patterns"    "theory"      "practices"  "individuals"   
+      Topic 72       Topic 73         Topic 74        Topic 75      Topic 76         Topic 77     
+ [1,] "search"       "voice"          "institutional" "women"       "organizations"  "decision"   
+ [2,] "likelihood"   "workplace"      "institutions"  "men"         "organizational" "making"     
+ [3,] "engagement"   "employees"      "business"      "gender"      "success"        "ethical"    
+ [4,] "joint"        "outcomes"       "countries"     "social"      "framework"      "group"      
+ [5,] "models"       "identification" "ownership"     "differences" "strategy"       "process"    
+      Topic 78      Topic 79        Topic 80        Topic 81       Topic 82         
+ [1,] "turnover"    "design"        "communication" "job"          "pay"            
+ [2,] "performance" "products"      "team"          "satisfaction" "managers"       
+ [3,] "job"         "technological" "members"       "relationship" "corporate"      
+ [4,] "employees"   "product"       "managers"      "turnover"     "social"         
+ [5,] "theory"      "industry"      "teams"         "individual"   "discuss"        
+      Topic 83           Topic 84      Topic 85         Topic 86         Topic 87    
+ [1,] "logic"            "employees"   "organizational" "institutional"  "alliances" 
+ [2,] "field"            "performance" "employee"       "differences"    "knowledge" 
+ [3,] "organizations"    "likely"      "employees"      "environments"   "governance"
+ [4,] "social"           "negative"    "individuals"    "theory"         "reputation"
+ [5,] "logics"           "job"         "leadership"     "legitimacy"     "alliance"  
+      Topic 88      Topic 89     Topic 90        Topic 91     Topic 92        Topic 93     
+ [1,] "market"      "industry"   "market"        "directors"  "entrepreneurs" "team"       
+ [2,] "ties"        "corporate"  "product"       "board"      "information"   "teams"      
+ [3,] "value"       "ventures"   "complementary" "boards"     "product"       "members"    
+ [4,] "exit"        "venture"    "knowledge"     "corporate"  "search"        "time"       
+ [5,] "form"        "reputation" "exploration"   "governance" "actions"       "motivation" 
+      Topic 94          Topic 95         Topic 96        Topic 97              Topic 98      
+ [1,] "theory"          "organizational" "creative"      "learning"            "decision"    
+ [2,] "practice"        "theory"         "decisions"     "foreign"             "makers"      
+ [3,] "characteristics" "executives"     "managers"      "entry"               "performance" 
+ [4,] "process"         "employee"       "strategic"     "industry"            "information" 
+ [5,] "organizational"  "units"          "relational"    "interorganizational" "strategic"   
+      Topic 99         Topic 100     Topic 101   Topic 102        Topic 103       Topic 104    
+ [1,] "organizational" "ceos"        "parties"   "corporate"      "capability"    "projects"   
+ [2,] "work"           "ceo"         "third"     "organizational" "capabilities"  "within"     
+ [3,] "trust"          "will"        "positive"  "managers"       "dynamic"       "theory"     
+ [4,] "institutional"  "performance" "perceived" "attention"      "development"   "investments"
+ [5,] "peers"          "theory"      "social"    "industries"     "resources"     "economic"   
+      Topic 105      Topic 106         Topic 107        Topic 108         Topic 109    
+ [1,] "work"         "performance"     "logics"         "performance"     "networks"   
+ [2,] "interactions" "costs"           "institutional"  "managers"        "network"    
+ [3,] "online"       "diversification" "organizational" "among"           "social"     
+ [4,] "team"         "search"          "different"      "decisions"       "entry"      
+ [5,] "coordination" "market"          "outcomes"       "projects"        "structure"  
+      Topic 110     Topic 111          Topic 112        Topic 113        Topic 114      
+ [1,] "performance" "industry"         "theory"         "attention"      "women"        
+ [2,] "status"      "behavioral"       "management"     "organizational" "gender"       
+ [3,] "groups"      "learning"         "theories"       "evolution"      "men"          
+ [4,] "group"       "subsequent"       "framework"      "capabilities"   "employees"    
+ [5,] "work"        "acquisition"      "approach"       "management"     "psychological"
+      Topic 115    Topic 116         Topic 117         Topic 118        Topic 119       
+ [1,] "innovation" "work"            "diversification" "development"    "organizations" 
+ [2,] "industry"   "framework"       "international"   "organizational" "community"     
+ [3,] "business"   "dimensions"      "relationship"    "justice"        "relationships" 
+ [4,] "capital"    "within"          "financial"       "routines"       "organizational"
+ [5,] "target"     "understanding"   "product"         "time"           "social"        
+      Topic 120    Topic 121        Topic 122        Topic 123        Topic 124       
+ [1,] "alliance"   "status"         "status"         "decisions"      "knowledge"     
+ [2,] "alliances"  "performance"    "market"         "regulatory"     "performance"   
+ [3,] "partners"   "negative"       "positive"       "institutional"  "capabilities"  
+ [4,] "prior"      "individuals"    "organization"   "differences"    "external"      
+ [5,] "within"     "social"         "reputation"     "foreign"        "learning"      
+      Topic 125       Topic 126             Topic 127     Topic 128        Topic 129        
+ [1,] "institutional" "exchange"            "csr"         "learning"       "conflict"       
+ [2,] "capabilities"  "partners"            "ceos"        "organizations"  "focus"          
+ [3,] "reputation"    "relationships"       "political"   "organizational" "experience"     
+ [4,] "complexity"    "social"              "corporate"   "collective"     "regulatory"     
+ [5,] "decision"      "prior"               "stakeholder" "status"         "process"        
+      Topic 130        Topic 131       Topic 132     Topic 133      Topic 134     Topic 135  
+ [1,] "performance"    "social"        "performance" "capabilities" "innovation"  "target"   
+ [2,] "decision"       "women"         "approaches"  "market"       "performance" "strategy" 
+ [3,] "makers"         "men"           "resources"   "markets"      "financial"   "first"    
+ [4,] "context"        "organization"  "competitive" "likely"       "knowledge"   "corporate"
+ [5,] "employees"      "interactions"  "empirical"   "costs"        "changes"     "type"     
+      Topic 136      Topic 137        Topic 138   Topic 139      Topic 140       Topic 141       
+ [1,] "family"       "capital"        "alliance"  "ideas"        "work"          "corporate"     
+ [2,] "strategic"    "human"          "alliances" "diversity"    "control"       "governance"    
+ [3,] "behavioral"   "categories"     "partners"  "investments"  "system"        "stakeholders"  
+ [4,] "management"   "market"         "learning"  "group"        "resources"     "organizational"
+ [5,] "strategy"     "employee"       "value"     "creative"     "organizations" "framework"     
+      Topic 142     Topic 143       Topic 144         Topic 145       Topic 146      
+ [1,] "work"        "groups"        "teams"           "behavioral"    "across"       
+ [2,] "support"     "power"         "services"        "family"        "external"     
+ [3,] "develop"     "financial"     "strategic"       "superior"      "collaboration"
+ [4,] "cognitive"   "group"         "diverse"         "strategy"      "practices"    
+ [5,] "role"        "business"      "diversity"       "performance"   "levels"       
+      Topic 147     Topic 148        Topic 149        Topic 150       Topic 151        
+ [1,] "performance" "ethical"        "acquisition"    "focus"         "analysts"       
+ [2,] "members"     "moral"          "growth"         "international" "diversification"
+ [3,] "collective"  "organizations"  "risk"           "ceos"          "competitive"    
+ [4,] "family"      "influence"      "market"         "performance"   "future"         
+ [5,] "individual"  "leadership"     "test"           "early"         "status"         
+      Topic 152     Topic 153       Topic 154        Topic 155      Topic 156       
+ [1,] "social"      "job"           "cultural"       "field"        "knowledge"     
+ [2,] "individuals" "search"        "organizational" "theory"       "management"    
+ [3,] "role"        "jobs"          "organization"   "innovations"  "learning"      
+ [4,] "influence"   "performance"   "practices"      "capabilities" "organizational"
+ [5,] "managers"    "organizations" "organizations"  "capital"      "routines"      
+      Topic 157       Topic 158     Topic 159     Topic 160        Topic 161     Topic 162     
+ [1,] "opportunities" "business"    "options"     "technology"     "types"       "social"      
+ [2,] "process"       "diversity"   "performance" "learning"       "positive"    "markets"     
+ [3,] "sources"       "positive"    "technology"  "organizational" "concept"     "online"      
+ [4,] "within"        "core"        "logic"       "experiences"    "better"      "behaviors"   
+ [5,] "external"      "managerial"  "markets"     "knowledge"      "used"        "community"   
+      Topic 163      Topic 164      Topic 165      Topic 166       Topic 167     Topic 168   
+ [1,] "development"  "performance"  "ceo"          "decisions"     "values"      "jobs"      
+ [2,] "power"        "social"       "compensation" "time"          "performance" "dependence"
+ [3,] "technologies" "companies"    "directors"    "experience"    "work"        "power"     
+ [4,] "positive"     "economic"     "outside"      "influence"     "management"  "job"       
+ [5,] "address"      "relationship" "risk"         "communication" "identity"    "theory"    
+      Topic 169          Topic 170        Topic 171        Topic 172       Topic 173       
+ [1,] "institutional"    "fit"            "organizational" "network"       "performance"   
+ [2,] "entrepreneurship" "performance"    "adoption"       "collaboration" "organizational"
+ [3,] "organizational"   "services"       "practice"       "actors"        "organizations" 
+ [4,] "innovation"       "institutional"  "status"         "knowledge"     "individuals"   
+ [5,] "analysts"         "products"       "organizations"  "social"        "innovation"    
+      Topic 174     Topic 175       Topic 176     Topic 177       Topic 178        Topic 179    
+ [1,] "resource"    "environmental" "decision"    "activities"    "organizational" "benefits"   
+ [2,] "market"      "teams"         "knowledge"   "dependence"    "managers"       "strategy"   
+ [3,] "performance" "team"          "decisions"   "investment"    "identification" "context"    
+ [4,] "governance"  "performance"   "making"      "communication" "members"        "mechanisms" 
+ [5,] "political"   "information"   "foreign"     "social"        "social"         "performance"
+      Topic 180     Topic 181       Topic 182       Topic 183        Topic 184    
+ [1,] "leadership"  "resources"     "team"          "strategic"      "business"   
+ [2,] "leaders"     "institutional" "creative"      "actions"        "systems"    
+ [3,] "theory"      "market"        "innovation"    "network"        "existing"   
+ [4,] "behavior"    "complementary" "development"   "actors"         "relational" 
+ [5,] "leader"      "context"       "knowledge"     "organizational" "investment" 
+      Topic 185         Topic 186        Topic 187       Topic 188        Topic 189       
+ [1,] "employees"       "organizational" "relationship"  "organizational" "change"        
+ [2,] "behaviors"       "organizations"  "political"     "innovation"     "strategic"     
+ [3,] "opportunities"   "forms"          "psychological" "technology"     "organizational"
+ [4,] "opportunity"     "practices"      "need"          "technological"  "develop"       
+ [5,] "voice"           "organization"   "professional"  "will"           "distinct"      
+      Topic 190     Topic 191     Topic 192       Topic 193      Topic 194        Topic 195       
+ [1,] "value"       "market"      "work"          "performance"  "identity"       "team"          
+ [2,] "performance" "competitive" "ties"          "business"     "organizational" "members"       
+ [3,] "competitive" "industry"    "relationships" "unit"         "identification" "among"         
+ [4,] "strategy"    "advantage"   "strategies"    "leadership"   "social"         "performance"   
+ [5,] "advantage"   "resource"    "outcomes"      "team"         "organizations"  "teams"         
+      Topic 196      Topic 197        Topic 198     Topic 199       Topic 200    
+ [1,] "influence"    "groups"         "group"       "resources"     "knowledge"  
+ [2,] "political"    "online"         "routines"    "resource"      "field"      
+ [3,] "association"  "routines"       "ties"        "portfolio"     "practice"   
+ [4,] "performance"  "competition"    "identity"    "value"         "personal"   
+ [5,] "public"       "innovation"     "groups"      "communication" "differences"
 ```
 
 ```Rscript
