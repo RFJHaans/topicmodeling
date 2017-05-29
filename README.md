@@ -135,7 +135,7 @@ Weighting          : term frequency (tf)
 # There are 1530 documents, containing 11744 unique words.
 
 # Let's check out the sixth and seventh abstract in our data (rows in the DTM) and the 4000th to 4010th words:
-inspect(dtm[6:7,4000:4010])
+    inspect(dtm[6:7,4000:4010])
 ```
 
 ```Ruby
@@ -198,16 +198,16 @@ Weighting          : term frequency (tf)
 # This greatly saves on computing time, but infrequent words may also provide valuable information,
 # so one needs to be careful when selecting cut-off values.
 # 1) Keep only those words that occur more than 50 times.
-minoccur = 50
+    minoccur = 50
 # 2) Keep only those words that occur in at least 10 of the documents. 
-mindocs = 10
+    mindocs = 10
 # Note that this is completed on the corpus, not the DTM. 
-smalldtm = DocumentTermMatrix(corpusclean, control=list(dictionary = findFreqTerms(dtm,minoccur,Inf), 
+    smalldtm = DocumentTermMatrix(corpusclean, control=list(dictionary = findFreqTerms(dtm,minoccur,Inf), 
                                                                   bounds = list(global = c(mindocs,Inf))))
 
-rowTotals = apply(smalldtm , 1, sum)
-smalldtm   = smalldtm[rowTotals> 0, ]
-smalldtm
+    rowTotals = apply(smalldtm , 1, sum)
+    smalldtm   = smalldtm[rowTotals> 0, ]
+    smalldtm
 ```  
 ```Ruby  
 <<DocumentTermMatrix (documents: 1530, terms: 518)>>
@@ -249,13 +249,13 @@ Time difference of 23.0202 mins
 ```
 
 ```Rscript
-k = 20
+    k2 = 20
 # We then create a variable which captures the starting time of this particular model.
-t1_LDA20 = Sys.time()
-LDA20 = LDA(smalldtm, k = k, control = list(seed = SEED))
-t2_LDA20 = Sys.time()
+    t1_LDA20 = Sys.time()
+    LDA20 = LDA(smalldtm, k = k2, control = list(seed = SEED))
+    t2_LDA20 = Sys.time()
 
-t2_LDA20 - t1_LDA20
+    t2_LDA20 - t1_LDA20
 ```
 
 ```Ruby
@@ -265,14 +265,14 @@ Time difference of 11.29924 secs
 ### LDA: The output
 ```Rscript
 # We then create a variable that captures the top ten terms assigned to the 15-topic model:
-topics_LDA200 = terms(LDA200, 10)
+    topics_LDA200 = terms(LDA200, 10)
 
 # We can write the results of the topics to a .csv file as follows:
 # write.table(topics_LDA200, file = "200_topics", sep=',',row.names = FALSE)
 # This writes to the directory of the .R script, but the 'file = ' can be changed to any directory.
 
 # And show the results:
-topics_LDA200
+    topics_LDA200
 ```
 
 ```Ruby  
@@ -405,20 +405,20 @@ Topic 175       Topic 176     Topic 177       Topic 178        Topic 179     Top
 
 ```Rscript
 # Let's now create a file containing the topic loadings for all articles:
-gammaDF_LDA200 = as.data.frame(LDA200@gamma) 
+    gammaDF_LDA200 = as.data.frame(LDA200@gamma) 
 # This creates a dataframe containing for every row the articles and for every column the per-topic loading.
-gammaDF_LDA200$ID = smalldtm$dimnames$Docs
+    gammaDF_LDA200$ID = smalldtm$dimnames$Docs
 # We add the ID from the metadata for merging with the metadata file. Of course
 # any other type of data can be added.
 
 # If we are not necessarily interested in using the full range of topic loadings,
 # but only in keeping those loadings that exceed a certain threshold, 
 # then we can use the code below:
-majortopics = topics(LDA200, threshold = 0.3)
-majortopics = as.data.frame(vapply(majortopics, 
+    majortopics = topics(LDA200, threshold = 0.3)
+    majortopics = as.data.frame(vapply(majortopics, 
        paste, collapse = ", ", character(1L)))
-majortopics$topic = sub("^$", 0, majortopics$topic)
-colnames(majortopics) = "topic" 
+    majortopics$topic = sub("^$", 0, majortopics$topic)
+    colnames(majortopics) = "topic" 
 # Here, we state that we want to show all topics that load greater than 0.3, per paper.
 # Of course, the higher the threshold, the fewer topics will be selected per paper.
 # The flattening (the second and third line) is done to clean this column up (from e.g. "c(1,5,7)" to "1,5,7")
@@ -431,24 +431,19 @@ colnames(majortopics) = "topic"
 
 # We can also select the highest loading topic for every paper by changing the threshold-subcommand
 # to k = (k refers to the number of highest loading topics per paper):
-highest = as.data.frame(data$SO)
+    highest = as.data.frame(data$SO)
 # I first make a column containing the journal, since we're going to do some follow-up checks on this dataframe. 
-highest$maintopic = topics(LDA200, k = 1)
+    highest$maintopic = topics(LDA200, k = 1)
 # I then add the highest loading topic of each abstract. We can do this because the order of the data is identical. 
 # Otherwise, we'd need to match the two using the ID variable (e.g. if some abstracts had been removed due to cleaning).
 
 ```
 
 ### Plotting topic usage across journals and over time
-We will use the most important topics for each tweet to see if it can predict whether or not the tweet was sent from an Android device. 
-See, for example: https://www.theatlantic.com/technology/archive/2017/03/trump-android-tweets/520869/
-This would suggest that "real" Trump tweets may be coming from an Android device, and differing topic usage across platforms may indicate that the tweets are coming from different sources (Trump, using Android, versus his team, using non-Android devices). 
-
-We estimate a logit model to predict this outcome, with dummies for every topic. 
 ```Rscript
 # We cross-tabulate journals and highest loading topics
-crosstabtable = table(highest)
-crosstabtable
+    crosstabtable = table(highest)
+    crosstabtable
 ```
 ```Ruby 
                                   maintopic
