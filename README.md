@@ -40,7 +40,7 @@ Trump tweets
 -------------------
 Code tested and written for R version 3.4, tm package version 0.7-1, topicmodels package version 0.2-6.
 Code prepared on May 10, 2017 by Richard Haans (haans@rsm.nl).
-Data obtained on May 10th using http://www.trumptwitterarchive.com/
+Data obtained from the Web of Science.
 
 ### Package installation
 
@@ -51,19 +51,16 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
 # The "topicmodels" package enables LDA analysis.
     if (!require("topicmodels")) install.packages("topicmodels")
     
-# The cluster package and igraph package will be used at the end of this code.
-    if (!require("cluster")) install.packages("cluster")
-    if (!require("igraph")) install.packages("igraph")
 ```
 
 ### Get the data, turn into a corpus, and clean it up
 
 ```Rscript
 ### Load data from a URL
-    data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/trumptweets.csv"))
+    data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/ASQ_AMJ_AMR_OS_SMJ.csv"))
 
 ### Create a corpus. 
-    corpus = VCorpus((VectorSource(data[, "text"])))
+    corpus = VCorpus((VectorSource(data[, "AB"])))
 
 ### Basic cleaning (step-wise)
 # We write everything to a new corpus called "corpusclean" so that we do not lose the original data.
@@ -83,90 +80,85 @@ Data obtained on May 10th using http://www.trumptwitterarchive.com/
 
 # To speed up the computation process for this tutorial, I have selected some choice words that were very common:
 # We update the corpusclean corpus by removing these words. 
-    corpusclean = tm_map(corpusclean, removeWords, c("back","thank","now","make america great again",
-                                                      "will","amp","just","new","make","like","america",
-                                                      "great","hashtagtrump","atrealdonaldtrump","get",
-                                                      "hashtagmakeamericagreatagain","donald",
-                                                      "trump"))
+    corpusclean = tm_map(corpusclean, removeWords, c("also","based","can","data","effect",
+                                                  "effects","elsevier","evidence","examine",
+                                                  "find","findings","high","low","higher","lower",
+                                                  "however","impact","implications","important",
+                                                  "less","literature","may","model","one","paper",
+                                                  "provide","research","all rights reserved",
+                                                  "results","show","studies","study","two","use",
+                                                  "using","rights","reserved","new","analysis","three",
+                                                  "associated","firm","firms","copyright","sons","john","ltd","wiley"))
 
 ### Adding metadata from the original database
 # This needs to be done because transforming things into a corpus only uses the texts.
     i = 0
     corpusclean = tm_map(corpusclean, function(x) {
       i <<- i +1
-      meta(x, "ID") = data[i,"ID"]
+      meta(x, "id") = data[i,"ID"]
       x
     })
 
     i = 0
     corpusclean = tm_map(corpusclean, function(x) {
       i <<- i +1
-      meta(x, "android") = data[i,"android"]
+      meta(x, "journal") = data[i,"SO"]
       x
     })
 
 # The above is a loop that goes through all files ("i") in the corpus
 # and then maps the information of the metadata dataframe 
 # (the "ID" column, et cetera) to a new piece of metadata in the corpus
-# which we also call "ID", et cetera.
+# which we also call "id", et cetera.
 
 # This enables making selections of the corpus based on metadata now.
-# Let's say we want to only look at articles from before 2011, then we do the following:
-# For example:
-    keep = meta(corpusclean, "android") == "1"
-    corpus.android = corpusclean[keep]
-
-    keep2 = meta(corpusclean, "android") == "0"
-    corpus.other = corpusclean[keep2]
-# This subsets the corpus into Android-origin tweets, and other tweets, based on the "android" metadata
+# Let's say we want to only look at articles from the AMJ, then we do the following:
+    keep = meta(corpusclean, "journal") == "ACADEMY OF MANAGEMENT JOURNAL"
+    corpus.AMJ = corpusclean[keep]
 
 # We then convert the corpus to a "Document-term-matrix" (dtm)
-    dtm = DocumentTermMatrix(corpusclean)  
+    dtm =DocumentTermMatrix(corpusclean)  
     dtm
 ```
 
 ```Ruby
-<<DocumentTermMatrix (documents: 4037, terms: 8799)>>
-Non-/sparse entries: 36042/35485521
+<<DocumentTermMatrix (documents: 1530, terms: 11744)>>
+Non-/sparse entries: 89755/17878565
 Sparsity           : 100%
-Maximal term length: 35
+Maximal term length: 30
 Weighting          : term frequency (tf)
 ```
 
 ```Rscript
 # dtms are organized with rows being documents and columns being the unique words.
-# We can see here that the longest word in the corpus is 35 characters long.
-# There are 4037 documents, containing 8799 unique words.
+# We can see here that the longest word in the corpus is 30 characters long.
+# There are 1530 documents, containing 11744 unique words.
 
-# Let's check out the first two tweets in our data (rows in the DTM) and the 250th to 300th words:
-    inspect(dtm[1:2,250:300])
+# Let's check out the sixth and seventh abstract in our data (rows in the DTM) and the 4000th to 4010th words:
+inspect(dtm[6:7,4000:4010])
 ```
 
 ```Ruby
     Terms
-Docs another answer answered answering answers anthony anti antia
-   1       0      0        0         0       0       0    0     0
-   2       0      0        0         0       0       0    0     0
-    Terms
-Docs anticatholic anticipated
-   1            0           0
-   2            0           0
+Docs  facilitation facilitative facilitators facilities facility facing fact factbased factions facto
+  ID6            0            0            0          0        0      1    0         0        0     0
+  ID7            0            0            0          0        0      0    1         0        0     0
 ```
 
 ```Rscript
-# These two tweets do not contain any of the listed words (all values are zero).
+# Abstract six contains "facing", once. Abstract seven contains "fact" once.
 
 # The step below is done to ensure that after removing various words, no documents are left empty 
 # (LDA does not know how to deal with empty documents). 
     rowTotals = apply(dtm , 1, sum)
 # This sums up the total number of words in each of the documents, e.g.:
     rowTotals[1:10]
-# shows the number of words for the first ten tweets.    
+# shows the number of words for the first ten abstracts.    
 ```
 
 ```Ruby
- 1  2  3  4  5  6  7  8  9 10 
- 4 11 12 10  6  6  5 12  9 10
+ ID1  ID2  ID3  ID4  ID5  ID6  ID7  ID8  ID9 ID10 
+  40   73   85  111  103   98   97   91   82  124 
 ```
 
 ```Rscript
@@ -175,49 +167,60 @@ Docs anticatholic anticipated
 # Then, we keep only those documents where the sum of words is greater than zero.
     dtm = dtm[rowTotals> 0, ]
     dtm
-# Shows that some documents have been removed: there are 4028 tweets left.      
+# Shows no abstracts were lost due to our cleaning.      
 ```
 
 ```Ruby
-<<DocumentTermMatrix (documents: 4028, terms: 8799)>>
-Non-/sparse entries: 36042/35406330
+<<DocumentTermMatrix (documents: 1530, terms: 11744)>>
+Non-/sparse entries: 89755/17878565
 Sparsity           : 100%
-Maximal term length: 35
+Maximal term length: 30
 Weighting          : term frequency (tf)
 ```
 
 ### Infrequent words and frequent words
 ```Rscript
 # Next, we will assess which words are most frequent:
-    highfreq100 = findFreqTerms(dtm,100,Inf)
-# This creates a vector containing words from the dtm that occur 100 or more time (100 to infinity times)
-# In the top-right window, we can see that there are 26 words occurring more than 100 times.
+    highfreq500 = findFreqTerms(dtm,500,Inf)
+# This creates a vector containing words from the dtm that occur 500 or more time (100 to infinity times)
+# In the top-right window, we can see that there are six words occurring more than 500 times.
 # Let's see what words these are:
-    highfreq100
+    highfreq500
 ```    
 
 ```Ruby    
- [1] "bad"       "big"       "can"       "clinton"   "country"   "crooked"   "cruz"     
- [8] "going"     "hillary"   "join"      "last"      "many"      "media"     "never"    
-[15] "one"       "people"    "poll"      "president" "said"      "ted"       "time"     
-[22] "today"     "tomorrow"  "tonight"   "vote"      "win"
+[1] "knowledge"      "organizational" "organizations"  "performance"    "social"        
+[6] "theory"  
 ```    
 
 ```Rscript
 # We can create a smaller dtm that makes the following two selections on the words in the corpus:
-# In this example, we won't actually use this smaller DTM since tweets are already very short,
-# but it is useful for typical topic modeling applications.
+# This greatly saves on computing time, but infrequent words may also provide valuable information,
+# so one needs to be careful when selecting cut-off values.
 # 1) Keep only those words that occur more than 50 times.
-    minoccur = 50
-# 2) Keep only those words that occur in at least 5 of the documents. 
-    mindocs = 5
+minoccur = 50
+# 2) Keep only those words that occur in at least 10 of the documents. 
+mindocs = 10
 # Note that this is completed on the corpus, not the DTM. 
-    smalldtm_50w_5doc = DocumentTermMatrix(corpusclean, control=list(dictionary = findFreqTerms(dtm,minoccur,Inf), 
-                                                                      bounds = list(global = c(mindocs,Inf))))
+smalldtm = DocumentTermMatrix(corpusclean, control=list(dictionary = findFreqTerms(dtm,minoccur,Inf), 
+                                                                  bounds = list(global = c(mindocs,Inf))))
 
-    rowTotals = apply(smalldtm_50w_5doc , 1, sum)
-    smalldtm_50w_5doc   = smalldtm_50w_5doc[rowTotals> 0, ]
+rowTotals = apply(smalldtm , 1, sum)
+smalldtm   = smalldtm[rowTotals> 0, ]
+smalldtm
 ```  
+```Ruby  
+<<DocumentTermMatrix (documents: 1530, terms: 518)>>
+Non-/sparse entries: 41211/751329
+Sparsity           : 95%
+Maximal term length: 19
+Weighting          : term frequency (tf)
+``` 
+```Rscript
+# This reduces the number of words to 518 (from 11744, so a very large reduction).
+# No abstracts are removed, however. 
+```  
+
 ### LDA: Running the model
 ```Rscript
 # We first fix the random seed to for future replication.
@@ -226,347 +229,339 @@ Weighting          : term frequency (tf)
 # Here we define the number of topics to be estimated. I find fifty provides decent results, while much lower 
 # leads to messy topics with little variation. 
 # However, little theory or careful investigation went into this so be wary.
-    k = 50
+    k = 200
 
 # We then create a variable which captures the starting time of this particular model.
-    t1_LDA50 = Sys.time()
-# And then we run a LDA model with 15 topics (k = 15).
+    t1_LDA200 = Sys.time()
+# And then we run a LDA model with 200 topics (k = 200).
 # Note that the input is the dtm
-    LDA50 = LDA(dtm, k = k, control = list(seed = SEED))
+    LDA200 = LDA(dtm, k = k, control = list(seed = SEED))
+# The default command uses the VEM algorithm, but an alternative is Gibbs sampling (see the documentation of the topicmodels package)
 # And we create a variable capturing the end time of this model.
-    t2_LDA50 = Sys.time()
+    t2_LDA200 = Sys.time()
 
 # We can then check the time difference to see how long the model took. 
-    t2_LDA50 - t1_LDA50
+    t2_LDA200 - t1_LDA200
 ```
 
 ```Ruby  
-Time difference of 11.02499 mins
+Time difference of 23.0202 mins
 ```
 
-In this example, I use the VEM algorithm to estimate the topic model. Note that an alternative algorithm, using Gibbs sampling, is also available in the topicmodels package. However, time constraints preclude a full appreciation of this approach during the workshop. The topicmodels package has good documentation on estimating a topic model using the Gibbs sampling approach.
+```Rscript
+k = 20
+# We then create a variable which captures the starting time of this particular model.
+t1_LDA20 = Sys.time()
+LDA20 = LDA(smalldtm, k = k, control = list(seed = SEED))
+t2_LDA20 = Sys.time()
+
+t2_LDA20 - t1_LDA20
+```
+
+```Ruby
+Time difference of 11.29924 secs
+```
 
 ### LDA: The output
 ```Rscript
 # We then create a variable that captures the top ten terms assigned to the 15-topic model:
-    topics_LDA50 = terms(LDA50, 10)
+topics_LDA200 = terms(LDA200, 10)
+
+# We can write the results of the topics to a .csv file as follows:
+# write.table(topics_LDA200, file = "200_topics", sep=',',row.names = FALSE)
+# This writes to the directory of the .R script, but the 'file = ' can be changed to any directory.
+
 # And show the results:
-    topics_LDA50
+topics_LDA200
 ```
 
 ```Ruby  
-      Topic 1  Topic 2       Topic 3     Topic 4            Topic 5           Topic 6     
- [1,] "said"   "hillary"     "american"  "hashtagimwithyou" "watching"        "media"     
- [2,] "say"    "clinton"     "senator"   "two"              "nevada"          "dishonest" 
- [3,] "rigged" "crooked"     "phony"     "convention"       "arizona"         "supporters"
- [4,] "safe"   "voter"       "help"      "others"           "think"           "election"  
- [5,] "system" "fraud"       "talk"      "california"       "atoreillyfactor" "nice"      
- [6,] "dems"   "poor"        "warren"    "crowds"           "atseanhannity"   "remember"  
- [7,] "major"  "sent"        "hope"      "tuesday"          "fact"            "things"    
- [8,] "real"   "problems"    "goofy"     "continue"         "nobody"          "leaving"   
- [9,] "answer" "temperament" "elizabeth" "atgreta"          "usa"             "statement" 
-[10,] "guns"   "serious"     "senate"    "respect"          "beautiful"       "always"  
+      Topic 1         Topic 2          Topic 3     Topic 4        Topic 5        Topic 6        Topic 7          Topic 8           Topic 9         Topic 10        Topic 11         Topic 12     
+ [1,] "efforts"       "social"         "family"    "experience"   "embeddedness" "ceo"          "control"        "relationship"    "incentives"    "cognitive"     "communication"  "strategic"  
+ [2,] "organizations" "exchange"       "venture"   "learning"     "network"      "ceos"         "organizational" "strategy"        "value"         "capabilities"  "processes"      "knowledge"  
+ [3,] "activities"    "justice"        "control"   "performance"  "knowledge"    "support"      "attention"      "country"         "network"       "processes"     "process"        "public"     
+ [4,] "work"          "perceptions"    "markets"   "prior"        "countries"    "corporate"    "organizations"  "partners"        "relationships" "control"       "coordination"   "political"  
+ [5,] "behavioral"    "behavior"       "ownership" "relational"   "transfer"     "management"   "technology"     "characteristics" "formal"        "managerial"    "organizational" "private"    
 
-      Topic 7   Topic 8       Topic 9   Topic 10    Topic 11               
- [1,] "obama"   "join"        "cruz"    "morning"   "see"                  
- [2,] "really"  "hashtagmaga" "today"   "everyone"  "soon"                 
- [3,] "lies"    "ohio"        "ted"     "didnt"     "together"             
- [4,] "family"  "tomorrow"    "deal"    "keep"      "hashtagbigleaguetruth"
- [5,] "looks"   "tickets"     "lyin"    "million"   "work"                 
- [6,] "rallies" "colorado"    "book"    "primary"   "hashtagdebate"        
- [7,] "air"     "atmikepence" "problem" "also"      "next"                 
- [8,] "went"    "wins"        "canada"  "lie"       "event"                
- [9,] "met"     "maine"       "born"    "terrorism" "team"                 
-[10,] "came"    "rapids"      "signed"  "fix"       "taking"               
+       Topic 13     Topic 14        Topic 15       Topic 16         Topic 17       Topic 18              Topic 19        Topic 20         Topic 21       Topic 22     Topic 23        Topic 24     
+ [1,] "market"     "events"        "team"         "change"         "knowledge"    "organizational"      "exit"          "team"           "performance"  "technology" "process"       "innovation" 
+ [2,] "value"      "across"        "creativity"   "institutional"  "innovation"   "organizations"       "work"          "structure"      "social"       "knowledge"  "organizations" "corporate"  
+ [3,] "growth"     "influence"     "teams"        "field"          "external"     "prior"               "analysts"      "exchange"       "diversity"    "initial"    "attention"     "network"    
+ [4,] "negative"   "positive"      "individual"   "actors"         "creativity"   "search"              "boundary"      "learning"       "relationship" "learning"   "activities"    "product"    
+ [5,] "will"       "focus"         "member"       "organizational" "ties"         "relationship"        "types"         "relationship"   "team"         "capacity"   "entrepreneurs" "industry"   
 
-      Topic 12               Topic 13     Topic 14       Topic 15            Topic 16          
- [1,] "time"                 "totally"    "tonight"      "hashtagtrumppence" "hashtagvotetrump"
- [2,] "watch"                "cant"       "rally"        "hashtagiacaucus"   "even"            
- [3,] "hashtagdraintheswamp" "biased"     "virginia"     "foreign"           "news"            
- [4,] "nothing"              "general"    "evening"      "forget"            "jeb"             
- [5,] "kasich"               "case"       "heading"      "november"          "live"            
- [6,] "hashtagicymi"         "university" "unbelievable" "reporting"         "history"         
- [7,] "report"               "unfair"     "center"       "hashtagrncincle"   "bush"            
- [8,] "winning"              "stay"       "seen"         "despite"           "worse"           
- [9,] "words"                "court"      "west"         "choice"            "endorsed"        
-[10,] "voted"                "justice"    "friday"       "started"           "truly"      
+       Topic 25         Topic 26       Topic 27     Topic 28         Topic 29        Topic 30     Topic 31         Topic 32     Topic 33      Topic 34      Topic 35         Topic 36     
+ [1,] "control"        "target"       "experience" "organizational" "knowledge"     "collective" "employees"      "network"    "ties"        "performance" "attention"      "mechanisms" 
+ [2,] "organizational" "acquisition"  "role"       "units"          "innovation"    "community"  "work"           "ties"       "networks"    "exploration" "theory"         "theoretical"
+ [3,] "acquisitions"   "acquisitions" "process"    "unit"           "challenges"    "management" "employee"       "networks"   "choices"     "search"      "organizations"  "different"  
+ [4,] "performance"    "market"       "groups"     "strategies"     "many"          "context"    "time"           "social"     "executives"  "problem"     "organizational" "orientation"
+ [5,] "managerial"     "focal"        "knowledge"  "relationship"   "form"          "knowledge"  "related"        "structure"  "make"        "information" "processes"      "strategies" 
 
-      Topic 17           Topic 18     Topic 19     Topic 20           Topic 21           
- [1,] "change"           "many"       "jobs"       "state"            "bad"              
- [2,] "doesnt"           "bernie"     "republican" "person"           "york"             
- [3,] "ads"              "run"        "party"      "called"           "guy"              
- [4,] "false"            "sanders"    "interview"  "terrible"         "hashtagtrumptrain"
- [5,] "athillaryclinton" "clintons"   "gave"       "email"            "fight"            
- [6,] "wrong"            "nomination" "weak"       "hashtaggopdebate" "hashtagdebates"   
- [7,] "judgement"        "treated"    "strong"     "fbi"              "attedcruz"        
- [8,] "negative"         "biggest"    "bring"      "delegates"        "open"             
- [9,] "spending"         "georgia"    "attack"     "top"              "stand"            
-[10,] "spent"            "list"       "democrats"  "winner"           "high"      
+       Topic 37     Topic 38           Topic 39        Topic 40       Topic 41         Topic 42         Topic 43         Topic 44         Topic 45      Topic 46         Topic 47         
+ [1,] "media"      "employee"         "performance"   "social"       "leadership"     "events"         "mechanisms"     "organizational" "integration" "knowledge"      "strategy"       
+ [2,] "voice"      "entrepreneurship" "relationships" "performance"  "behaviors"      "organizational" "organizations"  "theory"         "capital"     "transfer"       "fit"            
+ [3,] "product"    "knowledge"        "ceo"           "justice"      "leaders"        "work"           "theory"         "routines"       "boundaries"  "network"        "past"           
+ [4,] "managerial" "events"           "influence"     "diversity"    "work"           "framework"      "agency"         "business"       "process"     "boundary"       "innovation"     
+ [5,] "control"    "behavior"         "types"         "corporate"    "performance"    "creative"       "organizational" "capabilities"   "innovation"  "organizational" "develop"        
 
-      Topic 22  Topic 23    Topic 24   Topic 25     Topic 26    Topic 27 Topic 28    
- [1,] "show"    "hard"      "want"     "can"        "never"     "wow"    "atcnn"     
- [2,] "total"   "first"     "voters"   "campaign"   "money"     "job"    "running"   
- [3,] "isis"    "ever"      "law"      "look"       "wonderful" "states" "used"      
- [4,] "sad"     "kaine"     "trade"    "emails"     "millions"  "united" "place"     
- [5,] "far"     "interest"  "talking"  "forward"    "getting"   "away"   "tremendous"
- [6,] "world"   "corrupt"   "officers" "meeting"    "tax"       "word"   "asked"     
- [7,] "watched" "thing"     "order"    "washington" "wont"      "calls"  "trumps"    
- [8,] "liar"    "atjebbush" "police"   "anything"   "hillarys"  "china"  "may"       
- [9,] "joke"    "horrible"  "chance"   "funding"    "dollars"   "become" "part"      
-[10,] "iran"    "nafta"     "tower"    "self"       "home"      "russia" "greatly"   
+       Topic 48         Topic 49        Topic 50       Topic 51        Topic 52        Topic 53      Topic 54         Topic 55         Topic 56         Topic 57         Topic 58          
+ [1,] "learning"       "innovation"    "market"       "performance"   "ties"          "networks"    "identity"       "organizational" "social"         "complexity"     "uncertainty"     
+ [2,] "organizational" "technology"    "governance"   "product"       "logics"        "network"     "identities"     "risk"           "theory"         "task"           "different"       
+ [3,] "value"          "network"       "capabilities" "strategic"     "building"      "groups"      "organizational" "social"         "models"         "organizational" "choice"          
+ [4,] "theory"         "organizations" "companies"    "development"   "market"        "group"       "work"           "making"         "organizations"  "degree"         "governance"      
+ [5,] "processes"      "networks"      "executives"   "case"          "categories"    "ties"        "individuals"    "perspective"    "institutional"  "complex"        "structure"       
 
-      Topic 29       Topic 30                Topic 31      Topic 32      Topic 33      
- [1,] "atmegynkelly" "support"               "hampshire"   "way"         "win"         
- [2,] "special"      "lets"                  "ratings"     "let"         "dont"        
- [3,] "stop"         "believe"               "story"       "failing"     "failed"      
- [4,] "put"          "need"                  "yesterday"   "thanks"      "presidential"
- [5,] "fox"          "bill"                  "badly"       "allowed"     "endorsement" 
- [6,] "smart"        "hashtagcrookedhillary" "cnn"         "politicians" "lost"        
- [7,] "tough"        "house"                 "hashtagfitn" "give"        "candidate"   
- [8,] "interests"    "defeat"                "questions"   "exciting"    "romney"      
- [9,] "must"         "white"                 "woman"       "lot"         "zero"        
-[10,] "crazy"        "behind"                "thats"       "saw"         "mitt"      
+       Topic 59         Topic 60      Topic 61        Topic 62     Topic 63          Topic 64        Topic 65        Topic 66       Topic 67        Topic 68      Topic 69      Topic 70    
+ [1,] "strategy"       "feedback"    "entry"         "power"      "team"            "institutional" "different"     "performance"  "performance"   "activities"  "performance" "work"      
+ [2,] "affect"         "performance" "industry"      "source"     "entrepreneurial" "local"         "argue"         "coordination" "social"        "performance" "leader"      "change"    
+ [3,] "management"     "creative"    "technologies"  "ownership"  "teams"           "logics"        "performance"   "team"         "capabilities"  "learning"    "negative"    "action"    
+ [4,] "top"            "workers"     "power"         "theory"     "changes"         "search"        "among"         "teams"        "quality"       "activity"    "actions"     "mechanisms"
+ [5,] "role"           "internal"    "business"      "management" "products"        "investment"    "private"       "management"   "status"        "patterns"    "theory"      "practices" 
 
-      Topic 34    Topic 35      Topic 36   Topic 37          Topic 38     Topic 39      
- [1,] "good"      "enjoy"       "poll"     "another"         "speech"     "people"      
- [2,] "man"       "interviewed" "polls"    "atfoxandfriends" "debate"     "country"     
- [3,] "michigan"  "record"      "women"    "making"          "got"        "pennsylvania"
- [4,] "press"     "john"        "beat"     "happy"           "made"       "movement"    
- [5,] "hear"      "honor"       "votes"    "yet"             "times"      "looking"     
- [6,] "coming"    "voting"      "numbers"  "fantastic"       "texas"      "happening"   
- [7,] "politics"  "hit"         "lead"     "incredible"      "presidency" "missouri"    
- [8,] "knows"     "check"       "released" "melania"         "cleveland"  "thousands"   
- [9,] "announced" "set"         "final"    "wife"            "full"       "maryland"    
-[10,] "meet"      "pme"         "radical"  "conference"      "group"      "created"     
+       Topic 71         Topic 72       Topic 73         Topic 74        Topic 75      Topic 76         Topic 77      Topic 78      Topic 79        Topic 80        Topic 81       Topic 82         
+ [1,] "information"    "search"       "voice"          "institutional" "women"       "organizations"  "decision"    "turnover"    "design"        "communication" "job"          "pay"            
+ [2,] "social"         "likelihood"   "workplace"      "institutions"  "men"         "organizational" "making"      "performance" "products"      "team"          "satisfaction" "managers"       
+ [3,] "status"         "engagement"   "employees"      "business"      "gender"      "success"        "ethical"     "job"         "technological" "members"       "relationship" "corporate"      
+ [4,] "within"         "joint"        "outcomes"       "countries"     "social"      "framework"      "group"       "employees"   "product"       "managers"      "turnover"     "social"         
+ [5,] "individuals"    "models"       "identification" "ownership"     "differences" "strategy"       "process"     "theory"      "industry"      "teams"         "individual"   "discuss"        
 
-      Topic 40              Topic 41      Topic 42       Topic 43  Topic 44          
- [1,] "carolina"            "true"        "iowa"         "years"   "vote"            
- [2,] "hashtagamericafirst" "immigration" "florida"      "done"    "big"             
- [3,] "amazing"             "illegal"     "crowd"        "take"    "day"             
- [4,] "south"               "border"      "tomorrow"     "saying"  "right"           
- [5,] "north"               "please"      "must"         "gop"     "wisconsin"       
- [6,] "massive"             "interesting" "important"    "come"    "americans"       
- [7,] "every"               "prayers"     "potus"        "worst"   "agree"           
- [8,] "plan"                "correct"     "tampa"        "economy" "congratulations" 
- [9,] "expected"            "security"    "announcement" "four"    "future"          
-[10,] "httpstcokwolibaw"    "thoughts"    "complete"     "days"    "hashtagwiprimary"
+       Topic 83           Topic 84      Topic 85         Topic 86         Topic 87     Topic 88      Topic 89     Topic 90        Topic 91     Topic 92        Topic 93      Topic 94         
+ [1,] "logic"            "employees"   "organizational" "institutional"  "alliances"  "market"      "industry"   "market"        "directors"  "entrepreneurs" "team"        "theory"         
+ [2,] "field"            "performance" "employee"       "differences"    "knowledge"  "ties"        "corporate"  "product"       "board"      "information"   "teams"       "practice"       
+ [3,] "organizations"    "likely"      "employees"      "environments"   "governance" "value"       "ventures"   "complementary" "boards"     "product"       "members"     "characteristics"
+ [4,] "social"           "negative"    "individuals"    "theory"         "reputation" "exit"        "venture"    "knowledge"     "corporate"  "search"        "time"        "process"        
+ [5,] "logics"           "job"         "leadership"     "legitimacy"     "alliance"   "form"        "reputation" "exploration"   "governance" "actions"       "motivation"  "organizational" 
 
-      Topic 45     Topic 46      Topic 47      Topic 48       Topic 49     Topic 50    
- [1,] "atfoxnews"  "last"        "one"         "much"         "president"  "know"      
- [2,] "atnytimes"  "night"       "wants"       "better"       "going"      "best"      
- [3,] "won"        "rubio"       "shows"       "disaster"     "national"   "governor"  
- [4,] "says"       "love"        "year"        "obamacare"    "indiana"    "proud"     
- [5,] "well"       "video"       "still"       "repeal"       "mexico"     "leadership"
- [6,] "call"       "marco"       "left"        "replace"      "business"   "mike"      
- [7,] "taxes"      "little"      "without"     "told"         "close"      "pence"     
- [8,] "everything" "lightweight" "almost"      "atmorningjoe" "protect"    "trying"    
- [9,] "results"    "working"     "donaldtrump" "increase"     "government" "happen"    
-[10,] "game"       "race"        "since"       "save"         "drop"       "anyone"
+       Topic 95         Topic 96        Topic 97              Topic 98       Topic 99         Topic 100     Topic 101   Topic 102        Topic 103       Topic 104     Topic 105     
+ [1,] "organizational" "creative"      "learning"            "decision"     "organizational" "ceos"        "parties"   "corporate"      "capability"    "projects"    "work"        
+ [2,] "theory"         "decisions"     "foreign"             "makers"       "work"           "ceo"         "third"     "organizational" "capabilities"  "within"      "interactions"
+ [3,] "executives"     "managers"      "entry"               "performance"  "trust"          "will"        "positive"  "managers"       "dynamic"       "theory"      "online"      
+ [4,] "employee"       "strategic"     "industry"            "information"  "institutional"  "performance" "perceived" "attention"      "development"   "investments" "team"        
+ [5,] "units"          "relational"    "interorganizational" "strategic"    "peers"          "theory"      "social"    "industries"     "resources"     "economic"    "coordination"
+
+       Topic 106         Topic 107        Topic 108         Topic 109     Topic 110     Topic 111          Topic 112        Topic 113        Topic 114       Topic 115    Topic 116        
+ [1,] "performance"     "logics"         "performance"     "networks"    "performance" "industry"         "theory"         "attention"      "women"         "innovation" "work"           
+ [2,] "costs"           "institutional"  "managers"        "network"     "status"      "behavioral"       "management"     "organizational" "gender"        "industry"   "framework"      
+ [3,] "diversification" "organizational" "among"           "social"      "groups"      "learning"         "theories"       "evolution"      "men"           "business"   "dimensions"     
+ [4,] "search"          "different"      "decisions"       "entry"       "group"       "subsequent"       "framework"      "capabilities"   "employees"     "capital"    "within"         
+ [5,] "market"          "outcomes"       "projects"        "structure"   "work"        "acquisition"      "approach"       "management"     "psychological" "target"     "understanding"  
+
+       Topic 117         Topic 118        Topic 119        Topic 120    Topic 121        Topic 122        Topic 123        Topic 124        Topic 125       Topic 126             Topic 127    
+ [1,] "diversification" "development"    "organizations"  "alliance"   "status"         "status"         "decisions"      "knowledge"      "institutional" "exchange"            "csr"        
+ [2,] "international"   "organizational" "community"      "alliances"  "performance"    "market"         "regulatory"     "performance"    "capabilities"  "partners"            "ceos"       
+ [3,] "relationship"    "justice"        "relationships"  "partners"   "negative"       "positive"       "institutional"  "capabilities"   "reputation"    "relationships"       "political"  
+ [4,] "financial"       "routines"       "organizational" "prior"      "individuals"    "organization"   "differences"    "external"       "complexity"    "social"              "corporate"  
+ [5,] "product"         "time"           "social"         "within"     "social"         "reputation"     "foreign"        "learning"       "decision"      "prior"               "stakeholder"
+
+       Topic 128        Topic 129         Topic 130        Topic 131       Topic 132     Topic 133      Topic 134     Topic 135   Topic 136      Topic 137        Topic 138   Topic 139     
+ [1,] "learning"       "conflict"        "performance"    "social"        "performance" "capabilities" "innovation"  "target"    "family"       "capital"        "alliance"  "ideas"       
+ [2,] "organizations"  "focus"           "decision"       "women"         "approaches"  "market"       "performance" "strategy"  "strategic"    "human"          "alliances" "diversity"   
+ [3,] "organizational" "experience"      "makers"         "men"           "resources"   "markets"      "financial"   "first"     "behavioral"   "categories"     "partners"  "investments" 
+ [4,] "collective"     "regulatory"      "context"        "organization"  "competitive" "likely"       "knowledge"   "corporate" "management"   "market"         "learning"  "group"       
+ [5,] "status"         "process"         "employees"      "interactions"  "empirical"   "costs"        "changes"     "type"      "strategy"     "employee"       "value"     "creative"    
+
+       Topic 140       Topic 141        Topic 142     Topic 143       Topic 144         Topic 145       Topic 146       Topic 147     Topic 148        Topic 149        Topic 150      
+ [1,] "work"          "corporate"      "work"        "groups"        "teams"           "behavioral"    "across"        "performance" "ethical"        "acquisition"    "focus"        
+ [2,] "control"       "governance"     "support"     "power"         "services"        "family"        "external"      "members"     "moral"          "growth"         "international"
+ [3,] "system"        "stakeholders"   "develop"     "financial"     "strategic"       "superior"      "collaboration" "collective"  "organizations"  "risk"           "ceos"         
+ [4,] "resources"     "organizational" "cognitive"   "group"         "diverse"         "strategy"      "practices"     "family"      "influence"      "market"         "performance"  
+ [5,] "organizations" "framework"      "role"        "business"      "diversity"       "performance"   "levels"        "individual"  "leadership"     "test"           "early"        
+
+       Topic 151         Topic 152     Topic 153       Topic 154        Topic 155      Topic 156        Topic 157       Topic 158     Topic 159     Topic 160        Topic 161     Topic 162     
+ [1,] "analysts"        "social"      "job"           "cultural"       "field"        "knowledge"      "opportunities" "business"    "options"     "technology"     "types"       "social"      
+ [2,] "diversification" "individuals" "search"        "organizational" "theory"       "management"     "process"       "diversity"   "performance" "learning"       "positive"    "markets"     
+ [3,] "competitive"     "role"        "jobs"          "organization"   "innovations"  "learning"       "sources"       "positive"    "technology"  "organizational" "concept"     "online"      
+ [4,] "future"          "influence"   "performance"   "practices"      "capabilities" "organizational" "within"        "core"        "logic"       "experiences"    "better"      "behaviors"   
+ [5,] "status"          "managers"    "organizations" "organizations"  "capital"      "routines"       "external"      "managerial"  "markets"     "knowledge"      "used"        "community"   
+
+       Topic 163      Topic 164      Topic 165      Topic 166       Topic 167     Topic 168    Topic 169          Topic 170        Topic 171        Topic 172       Topic 173        Topic 174    
+ [1,] "development"  "performance"  "ceo"          "decisions"     "values"      "jobs"       "institutional"    "fit"            "organizational" "network"       "performance"    "resource"   
+ [2,] "power"        "social"       "compensation" "time"          "performance" "dependence" "entrepreneurship" "performance"    "adoption"       "collaboration" "organizational" "market"     
+ [3,] "technologies" "companies"    "directors"    "experience"    "work"        "power"      "organizational"   "services"       "practice"       "actors"        "organizations"  "performance"
+ [4,] "positive"     "economic"     "outside"      "influence"     "management"  "job"        "innovation"       "institutional"  "status"         "knowledge"     "individuals"    "governance" 
+ [5,] "address"      "relationship" "risk"         "communication" "identity"    "theory"     "analysts"         "products"       "organizations"  "social"        "innovation"     "political"  
+
+Topic 175       Topic 176     Topic 177       Topic 178        Topic 179     Topic 180     Topic 181       Topic 182       Topic 183        Topic 184     Topic 185         Topic 186       
+ [1,] "environmental" "decision"    "activities"    "organizational" "benefits"    "leadership"  "resources"     "team"          "strategic"      "business"    "employees"       "organizational"
+ [2,] "teams"         "knowledge"   "dependence"    "managers"       "strategy"    "leaders"     "institutional" "creative"      "actions"        "systems"     "behaviors"       "organizations" 
+ [3,] "team"          "decisions"   "investment"    "identification" "context"     "theory"      "market"        "innovation"    "network"        "existing"    "opportunities"   "forms"         
+ [4,] "performance"   "making"      "communication" "members"        "mechanisms"  "behavior"    "complementary" "development"   "actors"         "relational"  "opportunity"     "practices"     
+ [5,] "information"   "foreign"     "social"        "social"         "performance" "leader"      "context"       "knowledge"     "organizational" "investment"  "voice"           "organization"  
+
+       Topic 187       Topic 188        Topic 189        Topic 190     Topic 191     Topic 192       Topic 193      Topic 194        Topic 195        Topic 196      Topic 197        Topic 198    
+ [1,] "relationship"  "organizational" "change"         "value"       "market"      "work"          "performance"  "identity"       "team"           "influence"    "groups"         "group"      
+ [2,] "political"     "innovation"     "strategic"      "performance" "competitive" "ties"          "business"     "organizational" "members"        "political"    "online"         "routines"   
+ [3,] "psychological" "technology"     "organizational" "competitive" "industry"    "relationships" "unit"         "identification" "among"          "association"  "routines"       "ties"       
+ [4,] "need"          "technological"  "develop"        "strategy"    "advantage"   "strategies"    "leadership"   "social"         "performance"    "performance"  "competition"    "identity"   
+ [5,] "professional"  "will"           "distinct"       "advantage"   "resource"    "outcomes"      "team"         "organizations"  "teams"          "public"       "innovation"     "groups"     
+
+       Topic 199       Topic 200    
+ [1,] "resources"     "knowledge"  
+ [2,] "resource"      "field"      
+ [3,] "portfolio"     "practice"   
+ [4,] "value"         "personal"   
+ [5,] "communication" "differences"
 ```
 
 ```Rscript
-# We can write the results of the topics to a .csv file as follows:
-# write.table(topics_LDA50, file = "50_topics", sep=',',row.names = FALSE)
-
 # Let's now create a file containing the topic loadings for all articles:
-    gammaDF_LDA50 = as.data.frame(LDA50@gamma) 
+gammaDF_LDA200 = as.data.frame(LDA200@gamma) 
 # This creates a dataframe containing for every row the articles and for every column the per-topic loading.
-    gammaDF_LDA50$ID = dtm$dimnames$Docs
-# We add the file number from the metadata for merging with the metadata file. Of course
+gammaDF_LDA200$ID = smalldtm$dimnames$Docs
+# We add the ID from the metadata for merging with the metadata file. Of course
 # any other type of data can be added.
 
 # If we are not necessarily interested in using the full range of topic loadings,
 # but only in keeping those loadings that exceed a certain threshold, 
 # then we can use the code below:
-    majortopics = topics(LDA50, threshold = 0.3)
-    majortopics = as.data.frame(vapply(majortopics, 
-           paste, collapse = ", ", character(1L)))
-    colnames(majortopics) = "topic" 
+majortopics = topics(LDA200, threshold = 0.3)
+majortopics = as.data.frame(vapply(majortopics, 
+       paste, collapse = ", ", character(1L)))
+majortopics$topic = sub("^$", 0, majortopics$topic)
+colnames(majortopics) = "topic" 
 # Here, we state that we want to show all topics that load greater than 0.3, per paper.
-# As far as I know, there are no clear guidelines as to what cut-off is most meaningful.
 # Of course, the higher the threshold, the fewer topics will be selected per paper.
-# The flattening (the second and third lines) is done to clean this column up (from e.g. "c(1,5,7)" to "1,5,7")
+# The flattening (the second and third line) is done to clean this column up (from e.g. "c(1,5,7)" to "1,5,7")
+# The fourth line replaces those without a topic with the value zero.
+# The last line renames the column.
 
-    majortopics$topic = sub("^$", 0, majortopics$topic)
-
-    majortopics$ID = dtm$dimnames$Docs
-    
-# Some tweets may have no topics assigned to them; we replace their topic with 0. 
-
+# Some abstracts may have no topics assigned to them.
 # NOTE: It will report the topics in a sequential manner - the first topic in this list is not
-# necessarily the highest loading topic.     
+# necessarily the most important topic.   
 
 # We can also select the highest loading topic for every paper by changing the threshold-subcommand
 # to k = (k refers to the number of highest loading topics per paper):
-    highest = as.data.frame(cbind(iphone = data$iphone, highesttopic = topics(LDA50, k = 1)))
-    highest$ID = dtm$dimnames$Docs
+highest = as.data.frame(data$SO)
+# I first make a column containing the journal, since we're going to do some follow-up checks on this dataframe. 
+highest$maintopic = topics(LDA200, k = 1)
+# I then add the highest loading topic of each abstract. We can do this because the order of the data is identical. 
+# Otherwise, we'd need to match the two using the ID variable (e.g. if some abstracts had been removed due to cleaning).
 
-# Create a merged dataset for some follow-up analyses:
-    mergeddata = merge(data,highest,by="ID")
 ```
 
-### Using the topic model output: predict Android tweets
+### Plotting topic usage across journals and over time
 We will use the most important topics for each tweet to see if it can predict whether or not the tweet was sent from an Android device. 
 See, for example: https://www.theatlantic.com/technology/archive/2017/03/trump-android-tweets/520869/
 This would suggest that "real" Trump tweets may be coming from an Android device, and differing topic usage across platforms may indicate that the tweets are coming from different sources (Trump, using Android, versus his team, using non-Android devices). 
 
 We estimate a logit model to predict this outcome, with dummies for every topic. 
 ```Rscript
-    model = glm(android ~factor(highesttopic),family=binomial(link='logit'),data=mergeddata)
-
-    summary(model)
+# We cross-tabulate journals and highest loading topics
+crosstabtable = table(highest)
+crosstabtable
 ```
-
-```Ruby
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.5996  -1.0727  -0.7446   1.1407   2.0168  
-
-Coefficients:
-                        Estimate Std. Error z value Pr(>|z|)    
-(Intercept)             0.123614   0.222647   0.555 0.578757    
-factor(highesttopic)2   0.829816   0.294983   2.813 0.004907 ** 
-factor(highesttopic)3  -0.315986   0.323844  -0.976 0.329195    
-factor(highesttopic)4  -1.017432   0.318999  -3.189 0.001425 ** 
-factor(highesttopic)5  -0.518927   0.316675  -1.639 0.101281    
-factor(highesttopic)6   0.281851   0.337156   0.836 0.403174    
-factor(highesttopic)7   0.207743   0.333057   0.624 0.532794    
-factor(highesttopic)8  -2.017156   0.362977  -5.557 2.74e-08 ***
-factor(highesttopic)9   0.176491   0.305107   0.578 0.562957    
-factor(highesttopic)10 -0.177681   0.321971  -0.552 0.581048    
-factor(highesttopic)11 -1.469634   0.340443  -4.317 1.58e-05 ***
-factor(highesttopic)12 -0.374928   0.316805  -1.183 0.236624    
-factor(highesttopic)13  0.610355   0.333524   1.830 0.067247 .  
-factor(highesttopic)14 -0.789362   0.300811  -2.624 0.008688 ** 
-factor(highesttopic)15 -1.264786   0.327015  -3.868 0.000110 ***
-factor(highesttopic)16 -0.694159   0.331319  -2.095 0.036159 *  
-factor(highesttopic)17 -0.075986   0.311797  -0.244 0.807461    
-factor(highesttopic)18 -0.036603   0.328104  -0.112 0.911174    
-factor(highesttopic)19  0.034610   0.320208   0.108 0.913927    
-factor(highesttopic)20 -0.435989   0.327559  -1.331 0.183182    
-factor(highesttopic)21 -0.506606   0.325011  -1.559 0.119059    
-factor(highesttopic)22 -0.123614   0.329234  -0.375 0.707319    
-factor(highesttopic)23 -0.123614   0.326672  -0.378 0.705130    
-factor(highesttopic)24 -0.483617   0.325823  -1.484 0.137732    
-factor(highesttopic)25 -0.837380   0.334135  -2.506 0.012207 *  
-factor(highesttopic)26  0.767359   0.371096   2.068 0.038657 *  
-factor(highesttopic)27  0.188761   0.327559   0.576 0.564437    
-factor(highesttopic)28  0.087695   0.320613   0.274 0.784451    
-factor(highesttopic)29  0.157799   0.305679   0.516 0.605698    
-factor(highesttopic)30 -0.836564   0.330423  -2.532 0.011348 *  
-factor(highesttopic)31 -0.857583   0.333524  -2.571 0.010132 *  
-factor(highesttopic)32 -0.518927   0.316675  -1.639 0.101281    
-factor(highesttopic)33  0.325336   0.322772   1.008 0.313481    
-factor(highesttopic)34 -0.123614   0.317575  -0.389 0.697096    
-factor(highesttopic)35  0.079985   0.280818   0.285 0.775775    
-factor(highesttopic)36 -0.274437   0.304676  -0.901 0.367721    
-factor(highesttopic)37 -0.485404   0.305073  -1.591 0.111586    
-factor(highesttopic)38 -0.402327   0.335131  -1.201 0.229942    
-factor(highesttopic)39 -0.539774   0.321102  -1.681 0.092761 .  
-factor(highesttopic)40 -0.922122   0.299749  -3.076 0.002096 ** 
-factor(highesttopic)41 -0.228974   0.319921  -0.716 0.474163    
-factor(highesttopic)42 -1.098174   0.344150  -3.191 0.001418 ** 
-factor(highesttopic)43 -0.034002   0.330746  -0.103 0.918119    
-factor(highesttopic)44 -0.257145   0.321159  -0.801 0.423317    
-factor(highesttopic)45  0.001549   0.335137   0.005 0.996312    
-factor(highesttopic)46  0.271040   0.321821   0.842 0.399672    
-factor(highesttopic)47  0.346390   0.361693   0.958 0.338219    
-factor(highesttopic)48 -0.352456   0.317601  -1.110 0.267110    
-factor(highesttopic)49 -1.186508   0.346965  -3.420 0.000627 ***
-factor(highesttopic)50 -0.473816   0.323353  -1.465 0.142833    
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 5548.8  on 4027  degrees of freedom
-Residual deviance: 5249.9  on 3978  degrees of freedom
-AIC: 5349.9
-
-Number of Fisher Scoring iterations: 4
+```Ruby 
+                                  maintopic
+data$SO                             1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+  ACADEMY OF MANAGEMENT JOURNAL     1  3  1  0  3  4  3  0  1  1  1  0  2  0  4  6  0  0  1  1
+  ACADEMY OF MANAGEMENT REVIEW      2  1  0  0  1  0  0  0  0  4  0  0  0  1  0  0  0  1  2  1
+  ADMINISTRATIVE SCIENCE QUARTERLY  0  1  1  0  2  3  0  0  0  0  0  0  0  1  0  0  1  2  0  0
+  ORGANIZATION SCIENCE              4  4  2  4  2  0  4  1  2  3  5  3  0  1  0  4  5  4  3  2
+  STRATEGIC MANAGEMENT JOURNAL      0  0  6  3  2  9  1  6  5  5  2  2  5  3  1  2  2  1  1  0
+                                  maintopic
+data$SO                            21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40
+  ACADEMY OF MANAGEMENT JOURNAL     4  0  2  2  2  0  1  2  0  3  7  0  2  0  2  7  3  0  0  2
+  ACADEMY OF MANAGEMENT REVIEW      0  0  1  0  0  0  0  0  2  1  0  0  1  0  1  1  0  2  1  1
+  ADMINISTRATIVE SCIENCE QUARTERLY  0  0  0  0  1  2  1  1  0  0  1  0  2  0  2  0  0  0  0  0
+  ORGANIZATION SCIENCE              1  3  5  2  1  0  1  2  7  2  5  9  5  3  4  2  1  2  2  2
+  STRATEGIC MANAGEMENT JOURNAL      3  3  1  6  2  6  1  2  1  1  0  3  2  4  2  1  0  3  3  4
+                                  maintopic
+data$SO                            41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60
+  ACADEMY OF MANAGEMENT JOURNAL     5  3  5  2  1  2  0  1  0  0  1  2  3  5  0  2  0  0  2  3
+  ACADEMY OF MANAGEMENT REVIEW      1  0  0  0  0  0  0  1  0  0  0  1  1  5  0  6  2  1  0  0
+  ADMINISTRATIVE SCIENCE QUARTERLY  0  0  1  0  2  0  0  1  1  2  0  0  0  0  1  0  0  0  0  1
+  ORGANIZATION SCIENCE              1  4  3  3  3  3  4  3  2  3  4  3  2  3  5  0  1  1  2  1
+  STRATEGIC MANAGEMENT JOURNAL      1  1  1  2  1  2  4  2  3  2  6  1  1  0  2  0  0  6  3  1
+                                  maintopic
+data$SO                            61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80
+  ACADEMY OF MANAGEMENT JOURNAL     2  2  2  2  3  4  2  1  7  3  1  1  2  3  3  0  3  6  0  1
+  ACADEMY OF MANAGEMENT REVIEW      0  2  1  0  1  0  1  1  0  1  1  0  1  0  0  2  1  2  1  0
+  ADMINISTRATIVE SCIENCE QUARTERLY  0  0  1  1  0  0  3  0  0  0  0  2  0  1  1  0  1  1  0  0
+  ORGANIZATION SCIENCE              2  1  1  1  2  4  0  6  1  2  4  2  3  0  2  3  4  3  2  4
+  STRATEGIC MANAGEMENT JOURNAL      3  3  2  2  4  3  4  2  1  3  2  1  0  3  0  2  0  1  5  0
+                                  maintopic
+data$SO                            81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99
+  ACADEMY OF MANAGEMENT JOURNAL     6  0  5  4  0  0  0  1  1  1  2  2  3  0  0  3  2  1  2
+  ACADEMY OF MANAGEMENT REVIEW      0  0  5  0  1  3  0  1  0  0  0  1  1  4  1  1  0  1  1
+  ADMINISTRATIVE SCIENCE QUARTERLY  0  0  0  0  0  0  0  1  0  0  1  0  0  0  1  0  0  0  0
+  ORGANIZATION SCIENCE              1  3  0  1  2  1  2  1  2  4  3  2  2  2  3  2  4  2  2
+  STRATEGIC MANAGEMENT JOURNAL      1  4  0  3  1  4  3  0  5  1  4  1  1  1  1  1  6  7  0
+                                  maintopic
+data$SO                            100 101 102 103 104 105 106 107 108 109 110 111 112 113 114
+  ACADEMY OF MANAGEMENT JOURNAL      2   1   2   0   2   0   1   2   1   2   2   2   1   0   1
+  ACADEMY OF MANAGEMENT REVIEW       0   1   0   0   0   1   1   0   0   0   0   0   5   2   0
+  ADMINISTRATIVE SCIENCE QUARTERLY   5   0   0   0   0   0   0   1   0   1   0   1   0   0   1
+  ORGANIZATION SCIENCE               2   3   3   3   5   3   1   3   2   1   5   0   1   3   1
+  STRATEGIC MANAGEMENT JOURNAL       8   0   2   3   2   1   5   1   1   1   2   3   1   2   2
+                                  maintopic
+data$SO                            115 116 117 118 119 120 121 122 123 124 125 126 127 128 129
+  ACADEMY OF MANAGEMENT JOURNAL      1   0   1   3   3   1   3   1   0   2   1   2   0   0   2
+  ACADEMY OF MANAGEMENT REVIEW       0   2   0   1   1   0   0   1   0   0   1   0   0   2   1
+  ADMINISTRATIVE SCIENCE QUARTERLY   1   0   0   2   3   0   0   3   2   0   0   0   1   0   0
+  ORGANIZATION SCIENCE               0   2   4   1   0   3   4   2   6   1   1   2   1   5   1
+  STRATEGIC MANAGEMENT JOURNAL       4   0   6   1   1   3   0   0   1   4   3   1   4   0   4
+                                  maintopic
+data$SO                            130 131 132 133 134 135 136 137 138 139 140 141 142 143 144
+  ACADEMY OF MANAGEMENT JOURNAL      3   0   2   0   0   1   1   1   1   0   0   1   2   0   1
+  ACADEMY OF MANAGEMENT REVIEW       0   0   0   0   0   0   0   2   0   0   1   2   2   1   0
+  ADMINISTRATIVE SCIENCE QUARTERLY   0   0   0   0   0   2   0   0   0   2   0   0   0   1   0
+  ORGANIZATION SCIENCE               2   4   3   0   2   0   1   5   3   3   1   2   2   2   4
+  STRATEGIC MANAGEMENT JOURNAL       1   0   7  10   8   2   9   1   5   5   1   2   1   2   1
+                                  maintopic
+data$SO                            145 146 147 148 149 150 151 152 153 154 155 156 157 158 159
+  ACADEMY OF MANAGEMENT JOURNAL      0   1   1   4   1   1   3   2   3   1   0   1   2   1   1
+  ACADEMY OF MANAGEMENT REVIEW       0   0   0   1   0   0   1   1   0   2   1   0   0   1   1
+  ADMINISTRATIVE SCIENCE QUARTERLY   0   0   0   0   1   0   0   1   0   0   1   0   0   0   0
+  ORGANIZATION SCIENCE               3   7   3   2   3   1   1   3   3   7   0   5   3   1   1
+  STRATEGIC MANAGEMENT JOURNAL       3   2   2   2   3   3   3   2   0   1   4   1   2   4   1
+                                  maintopic
+data$SO                            160 161 162 163 164 165 166 167 168 169 170 171 172 173 174
+  ACADEMY OF MANAGEMENT JOURNAL      2   2   0   2   3   3   3   1   2   0   0   3   3   0   1
+  ACADEMY OF MANAGEMENT REVIEW       0   0   1   0   0   0   1   1   2   1   0   1   0   0   0
+  ADMINISTRATIVE SCIENCE QUARTERLY   1   2   0   1   0   1   1   2   3   1   0   1   0   0   0
+  ORGANIZATION SCIENCE               3   1   3   2   2   4   2   1   2   2   3   4   3   6   0
+  STRATEGIC MANAGEMENT JOURNAL       1   1   1   3   1   8   0   0   2   3   2   1   0   0  10
+                                  maintopic
+data$SO                            175 176 177 178 179 180 181 182 183 184 185 186 187 188 189
+  ACADEMY OF MANAGEMENT JOURNAL      2   2   2   2   1   4   1   1   1   0   3   3   2   1   2
+  ACADEMY OF MANAGEMENT REVIEW       1   0   0   0   1   1   0   0   0   2   1   0   1   1   1
+  ADMINISTRATIVE SCIENCE QUARTERLY   0   0   0   2   0   0   0   1   0   0   0   0   1   2   0
+  ORGANIZATION SCIENCE               1   1   1   1   3   1   2   1   2   2   3   4   1   3   3
+  STRATEGIC MANAGEMENT JOURNAL       0   0   5   0   2   1   8   2   3   2   1   1   0   0   2
+                                  maintopic
+data$SO                            190 191 192 193 194 195 196 197 198 199 200
+  ACADEMY OF MANAGEMENT JOURNAL      0   3   2   4   0   3   0   2   1   1   2
+  ACADEMY OF MANAGEMENT REVIEW       2   0   1   0   5   0   1   0   0   0   2
+  ADMINISTRATIVE SCIENCE QUARTERLY   0   0   1   0   0   1   0   0   1   0   0
+  ORGANIZATION SCIENCE               1   3   2   1   2   1   2   4   2   1   4
+  STRATEGIC MANAGEMENT JOURNAL       9   6   0   5   1   2   4   1   0   6   2
 ```
-We will focus on the significant topics. 
-```Rscript
-# Topics negatively related to android:
-    topics_LDA50[,c(4,8,11,14,15,16,25,30,31,40,42,49)]
-```
-
-```Ruby
-      Topic 4            Topic 8       Topic 11                Topic 14       Topic 15           
- [1,] "hashtagimwithyou" "join"        "see"                   "tonight"      "hashtagtrumppence"
- [2,] "two"              "hashtagmaga" "soon"                  "rally"        "hashtagiacaucus"  
- [3,] "convention"       "ohio"        "together"              "virginia"     "foreign"          
- [4,] "others"           "tomorrow"    "hashtagbigleaguetruth" "evening"      "forget"           
- [5,] "california"       "tickets"     "work"                  "heading"      "november"         
- [6,] "crowds"           "colorado"    "hashtagdebate"         "unbelievable" "reporting"        
- [7,] "tuesday"          "atmikepence" "next"                  "center"       "hashtagrncincle"  
- [8,] "continue"         "wins"        "event"                 "seen"         "despite"          
- [9,] "atgreta"          "maine"       "team"                  "west"         "choice"           
-[10,] "respect"          "rapids"      "taking"                "friday"       "started" 
-
-      Topic 16           Topic 25     Topic 30                Topic 31      Topic 40             
- [1,] "hashtagvotetrump" "can"        "support"               "hampshire"   "carolina"           
- [2,] "even"             "campaign"   "lets"                  "ratings"     "hashtagamericafirst"
- [3,] "news"             "look"       "believe"               "story"       "amazing"            
- [4,] "jeb"              "emails"     "need"                  "yesterday"   "south"              
- [5,] "live"             "forward"    "bill"                  "badly"       "north"              
- [6,] "history"          "meeting"    "hashtagcrookedhillary" "cnn"         "massive"            
- [7,] "bush"             "washington" "house"                 "hashtagfitn" "every"              
- [8,] "worse"            "anything"   "defeat"                "questions"   "plan"               
- [9,] "endorsed"         "funding"    "white"                 "woman"       "expected"           
-[10,] "truly"            "self"       "behind"                "thats"       "httpstcokwolibaw"  
-
-      Topic 42       Topic 49    
- [1,] "iowa"         "president" 
- [2,] "florida"      "going"     
- [3,] "crowd"        "national"  
- [4,] "tomorrow"     "indiana"   
- [5,] "must"         "mexico"    
- [6,] "important"    "business"  
- [7,] "potus"        "close"     
- [8,] "tampa"        "protect"   
- [9,] "announcement" "government"
-[10,] "complete"     "drop"    
-```
-
-So it seems that tweets not from Android tend to be rally-related or more generally PR-heavy (promoting specific hashtags, for example). 
 
 ```Rscript
-# Topics positively related to android:
-    topics_LDA50[,c(2,26)]
+# And create a barplot (first line) with ticks at every X value (second line)
+   barplot(crosstabtable,legend.text =  c("AMJ", "AMR","ASQ","OS","SMJ"),col = c("gray0","gray20","gray60","gray80","gray100"),            axisnames=FALSE)
+   axis(3,at=xpos,labels=seq(1,200,by=1))
 ```
-
-```Ruby
-      Topic 2       Topic 26   
- [1,] "hillary"     "never"    
- [2,] "clinton"     "money"    
- [3,] "crooked"     "wonderful"
- [4,] "voter"       "millions" 
- [5,] "fraud"       "getting"  
- [6,] "poor"        "tax"      
- [7,] "sent"        "wont"     
- [8,] "problems"    "hillarys" 
- [9,] "temperament" "dollars"  
-[10,] "serious"     "home" 
-```
-In contrast tweets from Android devices focus heavily on Hillary Clinton. Are these tweets coming more directly from Trump?
-
-### Using the topic model: Clustering similar tweets
-Here, we will create a distance measure based on the topic loadings for each tweet, and create a networked overview of highly similar tweets. 
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/alljournals.png)
 ```Rscript
-# Create a distance measure using basic euclidean distance, chosen for simplicity
-    cluster_gammas =  as.matrix(daisy(gammaDF_LDA50[,1:50], metric =  "euclidean", stand = TRUE))
-
-# Change row values to zero if less than row mean minus 2.5 row standard deviations
-# This is done to prevent an extremely dense network.
-# The value 2.5 is chosen solely for illustrative purposes (it leads to the nicest graph)
-# Credit: http://stackoverflow.com/a/16047196/1036500
-
-    cluster_gammas[ sweep(cluster_gammas, 1, (apply(cluster_gammas,1,mean) - 2.5* apply(cluster_gammas,1,sd) )) > 0 ] = 0
-    cluster_gammas[ cluster_gammas > 0 ] = 1
-
-    g = as.undirected(graph.adjacency(cluster_gammas))
-
-    plot(g, edge.curved = TRUE, vertex.color= "black", vertex.label = NA,vertex.size = 1)
+# We can also check only for the SMJ, for example.
+    barplot(crosstabtable["ACADEMY OF MANAGEMENT JOURNAL",], axisnames=FALSE)
+    axis(3,at=xpos,labels=seq(1,200,by=1))
 ```
-![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/network.png)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/AMJ.png)
+```Rscript
+# We can take a similar approach to look at trends over time.
+    highest_year = as.data.frame(data$PY)
+    highest_year$maintopic = topics(LDA200, k = 1)
+
+    crosstabtable_year = table(highest_year)
+    barplot(crosstabtable_year,legend.text =  c("2011", "2012","2013","2014","2015"),col =       c("gray0","gray20","gray60","gray80","gray100"), axisnames=FALSE)
+    axis(3,at=xpos,labels=seq(1,200,by=1))
+```
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/years.png)
+```Rscript
+    barplot(crosstabtable[1,], axisnames=FALSE)
+    axis(3,at=xpos,labels=seq(1,200,by=1))
+```
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2011.png)
+
