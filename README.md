@@ -13,7 +13,7 @@ Table of Contents
     -   [Applications](#applications)
 -   [Working with R](#r-basics)
 -   [Workshop examples](#examples)
-    -   [Trump tweets](#trump-tweets)
+    -   [Abstracts of five journals](#abstracts)
 
 
 Introduction
@@ -36,7 +36,7 @@ Here some content on working with R will be located.
 
 Workshop examples
 =====================
-Trump tweets
+Abstracts of five journals
 -------------------
 Code tested and written for R version 3.4, tm package version 0.7-1, topicmodels package version 0.2-6.
 Code prepared on May 10, 2017 by Richard Haans (haans@rsm.nl).
