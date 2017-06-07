@@ -31,7 +31,7 @@ Method-focused (#method)
 
 Applications
 -------------------
-<li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1177/0001839216686531">Labor of love: Amateurs and lay-expertise legitimation in the early U.S. radio field.</a> <b><i>Administrative Science Quarterly</b> In Press</i>. doi: 10.1177/0001839216686531</li>
+<li>Croidieu, G., & Kim, P. H. (Forthcoming) <a href="http://doi.org/10.1177/0001839216686531">Labor of love: Amateurs and lay-expertise legitimation in the early U.S. radio field.</a> <b><i>Administrative Science Quarterly</b></i>. doi: 10.1177/0001839216686531</li>
 <li>DiMaggio, P., Nag, M., & Blei, D. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.08.004">Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding.</a> <b><i>Poetics</b> 41</i>(6), 570–606. doi: 10.1016/j.poetic.2013.08.004</li>
 <li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1002/smj.2294">The double-edged sword of recombination in breakthrough innovation.</a> <b><i>Strategic Management Journal</b> 36</i>(10), 1435–1457. doi: 10.1002/smj.2294</li>
 
