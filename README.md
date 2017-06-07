@@ -24,10 +24,11 @@ Key articles
 =====================
 Method
 -------------------
+<li>Mohr, J. W., & Bogdanov, P. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.10.001">Introduction-Topic models: What they are and why they matter.</a>. <b><i>Poetics</b> 41</i>(6), 545–569. doi:10.1016/j.poetic.2013.10.001</li>
 
 Applications
 -------------------
-<li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1002/smj.2294">The double-edged sword of recombination in breakthrough innovation.</a>. <em>Strategic Management Journal</em>36(10), 1435–1457. doi:10.1002/smj.2294</li>
+<li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1002/smj.2294">The double-edged sword of recombination in breakthrough innovation.</a>. <b><i>Strategic Management Journal</b> 36</i>(10), 1435–1457. doi:10.1002/smj.2294</li>
 
 Working with R
 =====================
