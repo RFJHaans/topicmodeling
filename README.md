@@ -22,13 +22,16 @@ Brief introduction on the aims of the page etc.
 
 Key articles
 =====================
-Method
+Method-focused
 -------------------
-<li>Mohr, J. W., & Bogdanov, P. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.10.001">Introduction-Topic models: What they are and why they matter.</a>. <b><i>Poetics</b> 41</i>(6), 545–569. doi:10.1016/j.poetic.2013.10.001</li>
+<li>Baumer, E. P. S., Mimno, D., Guha, S., Quan, E., & Gay, G. K. (2017) <a href="http://doi.org/10.1002/asi.23786">Comparing grounded theory and topic modeling: Extreme divergence or unlikely convergence?</a> <b><i>Journal of the Association for Information Science and Technology</b> 68</i>(6), 1397–1410. doi:10.1002/asi.23786</li>
+<li>McFarland, D. A., Ramage, D., Chuang, J., Heer, J., Manning, C. D., & Jurafsky, D. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.06.004">Differentiating language usage through topic models.</a> <b><i>Journal of the Association for Information Science and Technology</b> 41</i>(6), 607–625. doi:10.1016/j.poetic.2013.06.004</li>
+<li>Mohr, J. W., & Bogdanov, P. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.10.001">Introduction-Topic models: What they are and why they matter.</a> <b><i>Poetics</b> 41</i>(6), 545–569. doi:10.1016/j.poetic.2013.10.001</li>
 
 Applications
 -------------------
-<li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1002/smj.2294">The double-edged sword of recombination in breakthrough innovation.</a>. <b><i>Strategic Management Journal</b> 36</i>(10), 1435–1457. doi:10.1002/smj.2294</li>
+<li>DiMaggio, P., Nag, M., & Blei, D. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.08.004">Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding.</a> <b><i>Poetics</b> 41</i>(6), 570–606. doi:10.1016/j.poetic.2013.08.004</li>
+<li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1002/smj.2294">The double-edged sword of recombination in breakthrough innovation.</a> <b><i>Strategic Management Journal</b> 36</i>(10), 1435–1457. doi:10.1002/smj.2294</li>
 
 Working with R
 =====================
