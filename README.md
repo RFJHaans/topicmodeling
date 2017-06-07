@@ -24,11 +24,10 @@ Key articles
 =====================
 Method
 -------------------
-Articles on the method of topic modeling.
 
 Applications
 -------------------
-Articles applying topic modeling.
+<li>Kaplan, S., & Vakili, K. (2015) <a href="http://doi.org/10.1002/smj.2294">The double-edged sword of recombination in breakthrough innovation.</a>. <em>Strategic Management Journal</em>36(10), 1435–1457. doi:10.1002/smj.2294</li>
 
 Working with R
 =====================
