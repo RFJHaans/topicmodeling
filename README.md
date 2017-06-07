@@ -8,12 +8,12 @@ Table of Contents
 ============
 
 -   [Introduction](#introduction)
--   [Key articles](#articles)
+-   [Key articles](#key-articles)
     -   [Method](#method)
     -   [Applications](#applications)
--   [Working with R](#r-basics)
--   [Workshop examples](#examples)
-    -   [Abstracts of five journals](#abstracts)
+-   [Working with R](#working-with-r)
+-   [Workshop examples](#workshop-examples)
+    -   [Abstracts of five journals](#abstracts-of-five-journals)
 
 
 Introduction
@@ -22,7 +22,7 @@ Brief introduction on the aims of the page etc.
 
 Key articles
 =====================
-Method-focused (#method)
+Method
 -------------------
 <li>Baumer, E. P. S., Mimno, D., Guha, S., Quan, E., & Gay, G. K. (2017) <a href="http://doi.org/10.1002/asi.23786">Comparing grounded theory and topic modeling: Extreme divergence or unlikely convergence?</a> <b><i>Journal of the Association for Information Science and Technology</b> 68</i>(6), 1397–1410. doi: 10.1002/asi.23786</li>
 <li>DiMaggio, P. (2015) <a href="http://doi.org/10.1177/2053951715602908">Adapting computational text analysis to social science (and vice versa).</a> <b><i>Big Data & Society</b> 2</i>(July-December), 1–5. doi: 10.1177/2053951715602908</li>
