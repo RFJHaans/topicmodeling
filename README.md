@@ -11,8 +11,8 @@ Table of Contents
 -   [Key articles](#key-articles)
     -   [Method](#method)
     -   [Applications](#applications)
--   [Working with R](#working-with-r)
--   [Workshop examples](#workshop-examples)
+-   [First time setup in R](#first-time-setup-in-r)
+-   [Workshop example](#workshop-example)
     -   [Abstracts of five journals](#abstracts-of-five-journals)
 
 
@@ -38,11 +38,28 @@ Applications
 <li>Wilson, A. J., & Joseph, J. (2015) <a href="http://doi.org/10.1108/S0742-332220150000032013">Organizational attention and technological search in the multibusiness firm: Motorola from 1974 to 1997.</a> <b><i>Advances in Strategic Management</b> 32</i>, 407-435. doi: 10.1108/S0742-332220150000032013</li>
 
 
-Working with R
+First time setup in R
 =====================
-Here some content on working with R will be located. 
+In order to follow the code developed for the workshop (shown in full below under Workshop example), two pieces of software need to be installed beforehand. The first is R, a free software environment for statistical computing and graphics. The second is RStudio, which is a graphical user interface that goes 'over' R, making it more user friendly. It is adamant that R is installed first, and RStudio second.
 
-Workshop examples
+Before running the code shown below, install R on your system by going to the following page:
+https://cran.r-project.org/
+Here, OS-specific versions of R can be found. For example, by clicking <a href="https://cran.r-project.org/bin/windows/base/">here</a>, you can download the executable for Windows (version 3.4.1 is the latest version at the time of writing). Installation using the default settings should do the trick.
+
+Then, after the installation of R is complete, navigate to the following page:
+https://www.rstudio.com/
+You can download the free version of RStudio on <a href="https://www.rstudio.com/products/rstudio/download/">this page</a>, with <a href = "https://download1.rstudio.org/RStudio-1.0.143.exe">this link</a> pointing directly to the executable for Windows. Again, the default settings should do the trick.
+
+Then, after these steps are completed, it is advisable to run the following two lines of code in RStudio before coming to the workshop. 
+```Rscript
+if (!require("tm")) install.packages("tm")
+if (!require("topicmodels")) install.packages("topicmodels")
+```
+
+These will install the two core packages that we will use in the workshop, and their installation may take some time on the standard conference internet connection. After this is done, you're all set to participate in the workshop! It is also possible to run the code shown below at home beforehand, but note that the actual topic model takes a LONG time to finish on most PCs. 
+
+
+Workshop example
 =====================
 Abstracts of five journals
 -------------------
