@@ -7,18 +7,12 @@ but is open to anyone interested.
 Table of Contents
 ============
 
--   [Introduction](#introduction)
 -   [Key articles](#key-articles)
     -   [Method](#method)
     -   [Applications](#applications)
 -   [First time setup in R](#first-time-setup-in-r)
 -   [Workshop example](#workshop-example)
     -   [Abstracts of five journals](#abstracts-of-five-journals)
-
-
-Introduction
-=====================
-Brief introduction on the aims of the page etc.
 
 Key articles
 =====================
