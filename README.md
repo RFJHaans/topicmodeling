@@ -569,8 +569,9 @@ Time difference of 11.29924 secs
     majortopics = topics(LDA200, threshold = 0.3)
     majortopics = as.data.frame(vapply(majortopics, 
        paste, collapse = ", ", character(1L)))
+    colnames(majortopics) = "topic"   
     majortopics$topic = sub("^$", 0, majortopics$topic)
-    colnames(majortopics) = "topic" 
+     
 # Here, we state that we want to show all topics that load greater than 0.3, per paper.
 # Of course, the higher the threshold, the fewer topics will be selected per paper.
 # The flattening (the second and third line) is done to clean this column up (from e.g. "c(1,5,7)" to "1,5,7")
