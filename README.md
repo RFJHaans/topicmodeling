@@ -117,14 +117,14 @@ load(url("https://github.com/RFJHaans/topicmodeling/blob/master/LDA200.RData?raw
     i = 0
     corpusclean = tm_map(corpusclean, function(x) {
       i <<- i +1
-      meta(x, "id") = data[i,"ID"]
+      meta(x, "id") = as.character(data[i,"ID"])
       x
     })
 
     i = 0
     corpusclean = tm_map(corpusclean, function(x) {
       i <<- i +1
-      meta(x, "journal") = data[i,"SO"]
+      meta(x, "journal") = as.character(data[i,"SO"])
       x
     })
 
