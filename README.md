@@ -695,14 +695,14 @@ data$SO                            190 191 192 193 194 195 196 197 198 199 200
 
 ```Rscript
 # And create a barplot (first line) with ticks at every X value (second line)
-   barplot(crosstabtable,legend.text =  c("AMJ", "AMR","ASQ","OS","SMJ"),col = c("gray0","gray20","gray60","gray80","gray100"),            axisnames=FALSE)
-   axis(3,at=xpos,labels=seq(1,200,by=1))
+    bar1 <- barplot(crosstabtable,legend.text =  c("AMJ", "AMR","ASQ","OS","SMJ"),col = c("gray0","gray20","gray60","gray80","gray100"), axisnames=FALSE)
+    axis(3,at=bar1,labels=seq(1,200,by=1))
 ```
 ![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/alljournals.png)
 ```Rscript
 # We can also check only for the SMJ, for example.
-    barplot(crosstabtable["ACADEMY OF MANAGEMENT JOURNAL",], axisnames=FALSE)
-    axis(3,at=xpos,labels=seq(1,200,by=1))
+    bar2 <-barplot(crosstabtable["ACADEMY OF MANAGEMENT JOURNAL",], axisnames=FALSE)
+    axis(3,at=bar2,labels=seq(1,200,by=1))
 ```
 ![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/AMJ.png)
 ```Rscript
@@ -711,13 +711,13 @@ data$SO                            190 191 192 193 194 195 196 197 198 199 200
     highest_year$maintopic = topics(LDA200, k = 1)
 
     crosstabtable_year = table(highest_year)
-    barplot(crosstabtable_year,legend.text =  c("2011", "2012","2013","2014","2015"),col =       c("gray0","gray20","gray60","gray80","gray100"), axisnames=FALSE)
-    axis(3,at=xpos,labels=seq(1,200,by=1))
+    bar3 <-barplot(crosstabtable_year,legend.text =  c("2011", "2012","2013","2014","2015"),col = c("gray0","gray20","gray60","gray80","gray100"), axisnames=FALSE)
+    axis(3,at=bar3,labels=seq(1,200,by=1))
 ```
 ![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/years.png)
 ```Rscript
-    barplot(crosstabtable[1,], axisnames=FALSE)
-    axis(3,at=xpos,labels=seq(1,200,by=1))
+    bar4 <-barplot(crosstabtable[1,], axisnames=FALSE)
+    axis(3,at=bar4,labels=seq(1,200,by=1))
 ```
 ![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2011.png)
 
