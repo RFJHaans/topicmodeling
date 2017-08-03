@@ -576,7 +576,7 @@ topics_LDA20
 ```
 
 ```Rscript
-# How to show word assignments:
+# How to show term weights:
     word_assignments200 <- t(posterior(LDA200)[["terms"]])
     word_assignments200[1:10,1:10]
 ```
