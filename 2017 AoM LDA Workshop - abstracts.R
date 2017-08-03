@@ -18,6 +18,9 @@ if (!require("topicmodels")) install.packages("topicmodels")
 ### Load the output of the 200-topic model (we cannot run it during the workshop due to time constraints). 
 load(url("https://github.com/RFJHaans/topicmodeling/blob/master/LDA200.RData?raw=true"))
 
+### And open the R code of this workshop (needs to be copy-pasted into an R script after loading):
+url.show("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2017%20AoM%20LDA%20Workshop%20-%20abstracts.R")
+
 #########################################
 ### Get the data, turn into a corpus, and clean it up
 #########################################
