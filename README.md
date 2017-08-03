@@ -245,7 +245,7 @@ Weighting          : term frequency (tf)
 
 ### LDA: Running the model
 ```Rscript
-# We first fix the random seed to for future replication.
+# We first fix the random seed for future replication.
     SEED = 123456789
 
 # Here we define the number of topics to be estimated. I find fifty provides decent results, while much lower 
