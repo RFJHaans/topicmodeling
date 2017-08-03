@@ -605,6 +605,14 @@ topics_LDA20
 # We cross-tabulate journals and highest loading topics
     crosstabtable = table(highest)
     crosstabtable
+    
+# The following topics are most distinctive for each journal:
+# AMJ: Topic 69  (distance = 6.5) --> performance, leader, negative, actions, theory
+# AMR: Topic 56  (distance = 5.5) --> social, theory, models, organizations, institutional
+# ASQ: Topic 100 (distance = 2) --> ceos, ceo, will, performance, theory
+# OS:  Topic 32  (distance = 8.25) --> network, ties, networks, social, structure
+# SMJ: Topic 133 (distance = 10) --> capabilities, market, markets, likely, costs
+    
 ```
 ```Ruby 
                                   maintopic
