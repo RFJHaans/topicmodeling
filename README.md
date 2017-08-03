@@ -22,6 +22,7 @@ Method
 <li>DiMaggio, P. (2015) <a href="http://doi.org/10.1177/2053951715602908">Adapting computational text analysis to social science (and vice versa).</a> <b><i>Big Data & Society</b> 2</i>(July-December), 1–5. doi: 10.1177/2053951715602908</li>
 <li>McFarland, D. A., Ramage, D., Chuang, J., Heer, J., Manning, C. D., & Jurafsky, D. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.06.004">Differentiating language usage through topic models.</a> <b><i>Journal of the Association for Information Science and Technology</b> 41</i>(6), 607–625. doi: 10.1016/j.poetic.2013.06.004</li>
 <li>Mohr, J. W., & Bogdanov, P. (2013) <a href="http://doi.org/10.1016/j.poetic.2013.10.001">Introduction-Topic models: What they are and why they matter.</a> <b><i>Poetics</b> 41</i>(6), 545–569. doi: 10.1016/j.poetic.2013.10.001</li>
+<li>The entire special issue of the Journal of the Digital Humanities: Vol. 2, No. 1 (2012) <a href="http://journalofdigitalhumanities.org/2-1/">found here</a>. Also contains some nice videos.  
 
 Applications
 -------------------
