@@ -65,6 +65,10 @@ Data obtained from the Web of Science.
 ### Package installation
 
 ```Rscript
+### Open the R code of this workshop (needs to be copy-pasted into an R script after loading):
+url.show("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2017%20AoM%20LDA%20Workshop%20-%20abstracts.R")
+
+
 # The "tm" package enables the text mining infrastructure that we will use for LDA.
     if (!require("tm")) install.packages("tm")
 
