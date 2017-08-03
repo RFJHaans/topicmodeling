@@ -556,6 +556,11 @@ Time difference of 11.29924 secs
  [3,] "association"  "routines"       "ties"        "portfolio"     "practice"   
  [4,] "performance"  "competition"    "identity"    "value"         "personal"   
  [5,] "public"       "innovation"     "groups"      "communication" "differences"
+ 
+# We can also look at the 20-topic model's topics: 
+topics_LDA20 = terms(LDA20, 10)
+# And show the results:
+topics_LDA20
 ```
 
 ```Rscript
