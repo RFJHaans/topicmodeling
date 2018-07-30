@@ -83,6 +83,11 @@ smalldtm_50w_general <- DocumentTermMatrix(corpusclean_general, control=list(dic
 # We first fix the random seed for future replication.
 SEED <- 123456789
 
+load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_preTM.RData?raw=true"))
+
+
+
+
 # 10 Topics
 t1_10_pr <- Sys.time()
 LDA10_pr <- LDA(smalldtm_50w_pr, k = 10, control = list(seed = SEED, verbose = 1))
@@ -158,15 +163,15 @@ topics_LDA50_general
 documents_LDA10_pr <- as.data.frame(LDA10_pr@gamma) 
 documents_LDA10_general <- as.data.frame(LDA10_general@gamma) 
 
-write.table(documents_LDA10_pr, file = "documents_10_pr.csv", sep=',',row.names = FALSE)
-write.table(documents_LDA10_general, file = "documents_10_general.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA10_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_10_pr.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA10_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_10_general.csv", sep=',',row.names = FALSE)
 
 
 terms_LDA10_pr <- posterior(LDA10_pr)[["terms"]]
 terms_LDA10_general <- posterior(LDA10_general)[["terms"]]
 
-write.table(terms_LDA10_pr, file = "terms_10_pr.csv", sep=',',row.names = FALSE)
-write.table(terms_LDA10_general, file = "terms_10_general.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA10_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_10_pr.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA10_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_10_general.csv", sep=',',row.names = FALSE)
 
 
 
@@ -185,15 +190,15 @@ topics(LDA10_general, threshold = 0.2)
 documents_LDA25_pr <- as.data.frame(LDA25_pr@gamma) 
 documents_LDA25_general <- as.data.frame(LDA25_general@gamma) 
 
-write.table(documents_LDA25_pr, file = "documents_25_pr.csv", sep=',',row.names = FALSE)
-write.table(documents_LDA25_general, file = "documents_25_general.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA25_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_25_pr.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA25_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_25_general.csv", sep=',',row.names = FALSE)
 
 
 terms_LDA25_pr <- posterior(LDA25_pr)[["terms"]]
 terms_LDA25_general <- posterior(LDA25_general)[["terms"]]
 
-write.table(terms_LDA25_pr, file = "terms_25_pr.csv", sep=',',row.names = FALSE)
-write.table(terms_LDA25_general, file = "terms_25_general.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA25_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_25_pr.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA25_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_25_general.csv", sep=',',row.names = FALSE)
 
 
 
@@ -214,15 +219,15 @@ topics(LDA25_general, threshold = 0.2)
 documents_LDA50_pr <- as.data.frame(LDA50_pr@gamma) 
 documents_LDA50_general <- as.data.frame(LDA50_general@gamma) 
 
-write.table(documents_LDA50_pr, file = "documents_50_pr.csv", sep=',',row.names = FALSE)
-write.table(documents_LDA50_general, file = "documents_50_general.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA50_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_50_pr.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA50_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_50_general.csv", sep=',',row.names = FALSE)
 
 
 terms_LDA50_pr <- posterior(LDA50_pr)[["terms"]]
 terms_LDA50_general <- posterior(LDA50_general)[["terms"]]
 
-write.table(terms_LDA50_pr, file = "terms_50_pr.csv", sep=',',row.names = FALSE)
-write.table(terms_LDA50_general, file = "terms_50_general.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA50_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_50_pr.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA50_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_50_general.csv", sep=',',row.names = FALSE)
 
 
 
@@ -358,11 +363,26 @@ topicmodels2LDAvis <- function(x, ...){
 }
 
 LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_pr", open.browser = FALSE)
+# http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_pr/index.html
+
 LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_general", open.browser = FALSE)
+# http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_general/index.html
 
 LDAvis::serVis(topicmodels2LDAvis(LDA25_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_pr", open.browser = FALSE)
+# http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_pr/index.html
+
 LDAvis::serVis(topicmodels2LDAvis(LDA25_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_general", open.browser = FALSE)
+# http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_general/index.html
 
 LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_pr", open.browser = FALSE)
+# http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_50_pr/index.html
+
 LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_general", open.browser = FALSE)
+# http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_50_general/index.html
+
+
+
+load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_LDA.RData?raw=true"))
+
+
 
