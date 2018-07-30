@@ -55,11 +55,7 @@ corpusclean_general <- tm_map(corpusclean_general , stripWhitespace)
 #########################################
 # We convert the corpus to a "Document-term-matrix" (dtm)
 dtm_pr <-DocumentTermMatrix(corpusclean_pr)  
-dtm_pr
-
 dtm_general <-DocumentTermMatrix(corpusclean_general)  
-dtm_general
-
 # dtms are organized with rows being documents and columns being the unique words.
 
 # To speed up the computation process for this tutorial, I have selected some of the most frequent words 
@@ -83,11 +79,10 @@ smalldtm_50w_general <- DocumentTermMatrix(corpusclean_general, control=list(dic
 # We first fix the random seed for future replication.
 SEED <- 123456789
 
+# The following loads the data after processing via the above steps:
 load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_preTM.RData?raw=true"))
 
-
-
-
+#########################################
 # 10 Topics
 t1_10_pr <- Sys.time()
 LDA10_pr <- LDA(smalldtm_50w_pr, k = 10, control = list(seed = SEED, verbose = 1))
@@ -97,9 +92,11 @@ t1_10_general <- Sys.time()
 LDA10_general <- LDA(smalldtm_50w_general, k = 10, control = list(seed = SEED, verbose = 1))
 t2_10_general <- Sys.time()
 
+# Assess time it took to run:
 t2_10_pr- t1_10_pr
 t2_10_general- t1_10_general
 
+#########################################
 # 25 Topics
 t1_25_pr <- Sys.time()
 LDA25_pr <- LDA(smalldtm_50w_pr, k = 25, control = list(seed = SEED, verbose = 1))
@@ -109,9 +106,11 @@ t1_25_general <- Sys.time()
 LDA25_general <- LDA(smalldtm_50w_general, k = 25, control = list(seed = SEED, verbose = 1))
 t2_25_general <- Sys.time()
 
+# Assess time it took to run:
 t2_25_pr- t1_25_pr
 t2_25_general- t1_25_general
 
+#########################################
 # 50 Topics
 t1_50_pr <- Sys.time()
 LDA50_pr <- LDA(smalldtm_50w_pr, k = 50, control = list(seed = SEED, verbose = 1))
@@ -121,6 +120,7 @@ t1_50_general <- Sys.time()
 LDA50_general <- LDA(smalldtm_50w_general, k = 50, control = list(seed = SEED, verbose = 1))
 t2_50_general <- Sys.time()
 
+# Assess time it took to run:
 t2_50_pr- t1_50_pr
 t2_50_general- t1_50_general
 
@@ -128,6 +128,11 @@ t2_50_general- t1_50_general
 #########################################
 ### LDA: Rendering
 #########################################
+#########################################
+# Terms per topic
+
+#########################################
+# 10 topics
 # We then create a variable that captures the top ten terms assigned to the 10-topic model:
 topics_LDA10_pr <- terms(LDA10_pr, 10)
 # And show the results:
@@ -137,8 +142,8 @@ topics_LDA10_general <- terms(LDA10_general, 10)
 # And show the results:
 topics_LDA10_general
 
-
-
+#########################################
+# 25 topics
 topics_LDA25_pr <- terms(LDA25_pr, 25)
 # And show the results:
 topics_LDA25_pr
@@ -147,8 +152,8 @@ topics_LDA25_general <- terms(LDA25_general, 25)
 # And show the results:
 topics_LDA25_general
 
-
-
+#########################################
+# 50 topics
 topics_LDA50_pr <- terms(LDA50_pr, 50)
 # And show the results:
 topics_LDA50_pr
@@ -158,183 +163,106 @@ topics_LDA50_general <- terms(LDA50_general, 50)
 topics_LDA50_general
 
 
-
-# Let's now create a file containing the topic loadings for all articles:
+#########################################
+# Getting more precise matrices for rendering
+# Document-topic matrices
 documents_LDA10_pr <- as.data.frame(LDA10_pr@gamma) 
 documents_LDA10_general <- as.data.frame(LDA10_general@gamma) 
-
-write.table(documents_LDA10_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_10_pr.csv", sep=',',row.names = FALSE)
-write.table(documents_LDA10_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_10_general.csv", sep=',',row.names = FALSE)
-
-
-terms_LDA10_pr <- posterior(LDA10_pr)[["terms"]]
-terms_LDA10_general <- posterior(LDA10_general)[["terms"]]
-
-write.table(terms_LDA10_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_10_pr.csv", sep=',',row.names = FALSE)
-write.table(terms_LDA10_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_10_general.csv", sep=',',row.names = FALSE)
-
-
-
-# If we are not necessarily interested in using the full range of topic loadings,
-# but only in keeping those loadings that exceed a certain threshold, 
-# then we can use the code below:
-topics(LDA10_pr, threshold = 0.2)
-topics(LDA10_general, threshold = 0.2)
-
-
-
-
-
-
-# Let's now create a file containing the topic loadings for all articles:
 documents_LDA25_pr <- as.data.frame(LDA25_pr@gamma) 
 documents_LDA25_general <- as.data.frame(LDA25_general@gamma) 
-
-write.table(documents_LDA25_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_25_pr.csv", sep=',',row.names = FALSE)
-write.table(documents_LDA25_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_25_general.csv", sep=',',row.names = FALSE)
-
-
-terms_LDA25_pr <- posterior(LDA25_pr)[["terms"]]
-terms_LDA25_general <- posterior(LDA25_general)[["terms"]]
-
-write.table(terms_LDA25_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_25_pr.csv", sep=',',row.names = FALSE)
-write.table(terms_LDA25_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_25_general.csv", sep=',',row.names = FALSE)
-
-
-
-# If we are not necessarily interested in using the full range of topic loadings,
-# but only in keeping those loadings that exceed a certain threshold, 
-# then we can use the code below:
-topics(LDA25_pr, threshold = 0.2)
-topics(LDA25_general, threshold = 0.2)
-
-
-
-
-
-
-
-
-# Let's now create a file containing the topic loadings for all articles:
 documents_LDA50_pr <- as.data.frame(LDA50_pr@gamma) 
 documents_LDA50_general <- as.data.frame(LDA50_general@gamma) 
 
-write.table(documents_LDA50_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_50_pr.csv", sep=',',row.names = FALSE)
-write.table(documents_LDA50_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_50_general.csv", sep=',',row.names = FALSE)
-
-
+#########################################
+# Term-topic matrices
+terms_LDA10_pr <- posterior(LDA10_pr)[["terms"]]
+terms_LDA10_general <- posterior(LDA10_general)[["terms"]]
+terms_LDA25_pr <- posterior(LDA25_pr)[["terms"]]
+terms_LDA25_general <- posterior(LDA25_general)[["terms"]]
 terms_LDA50_pr <- posterior(LDA50_pr)[["terms"]]
 terms_LDA50_general <- posterior(LDA50_general)[["terms"]]
 
+#########################################
+# Write tables
+write.table(documents_LDA10_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_10_pr.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA10_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_10_general.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA25_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_25_pr.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA25_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_25_general.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA50_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_50_pr.csv", sep=',',row.names = FALSE)
+write.table(documents_LDA50_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\documents_50_general.csv", sep=',',row.names = FALSE)
+
+write.table(terms_LDA10_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_10_pr.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA10_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_10_general.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA25_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_25_pr.csv", sep=',',row.names = FALSE)
+write.table(terms_LDA25_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_25_general.csv", sep=',',row.names = FALSE)
 write.table(terms_LDA50_pr, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_50_pr.csv", sep=',',row.names = FALSE)
 write.table(terms_LDA50_general, file = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\terms_50_general.csv", sep=',',row.names = FALSE)
 
 
-
-# If we are not necessarily interested in using the full range of topic loadings,
-# but only in keeping those loadings that exceed a certain threshold, 
-# then we can use the code below:
-topics(LDA50_pr, threshold = 0.2)
-topics(LDA50_general, threshold = 0.2)
-
-
 #####################################
-### Creating topic networks (as in paper with Vern)
+### Creating topic networks (based on term correlations)
 #####################################
+# Get the term-topic matrices again
 post_10_pr <- topicmodels::posterior(LDA10_pr)
+post_10_general <- topicmodels::posterior(LDA10_general)
+post_25_pr <- topicmodels::posterior(LDA25_pr)
+post_25_general <- topicmodels::posterior(LDA25_general)
+post_50_pr <- topicmodels::posterior(LDA50_pr)
+post_50_general <- topicmodels::posterior(LDA50_general)
 
+# Create correlation matrices between the topics based on their term-loadings
 cor_mat_10_pr <- cor(t(post_10_pr[["terms"]]))
-# Change row values to zero if less than row minimum plus row standard deviation
-# This is how Jockers subsets the distance matrix to keep only 
+cor_mat_10_general <- cor(t(post_10_general[["terms"]]))
+cor_mat_25_pr <- cor(t(post_25_pr[["terms"]]))
+cor_mat_25_general <- cor(t(post_25_general[["terms"]]))
+cor_mat_50_pr <- cor(t(post_50_pr[["terms"]]))
+cor_mat_50_general <- cor(t(post_50_general[["terms"]]))
+
+
+# Change row values to zero if less than row minimum plus two times the row standard deviation
+# The two times was chosen for illustrative purposes. 
+# This is similar to how Jockers subsets the distance matrix to keep only 
 # closely related documents and avoid a dense spagetti diagram 
 # that's difficult to interpret (hat-tip: http://stackoverflow.com/a/16047196/1036500)
 cor_mat_10_pr[ sweep(cor_mat_10_pr, 1, (apply(cor_mat_10_pr,1,min) + 2*apply(cor_mat_10_pr,1,sd) )) < 0 ] <- 0
 diag(cor_mat_10_pr) <- 0
+cor_mat_10_general[ sweep(cor_mat_10_general, 1, (apply(cor_mat_10_general,1,min) + 2*apply(cor_mat_10_general,1,sd) )) < 0 ] <- 0
+diag(cor_mat_10_general) <- 0
+cor_mat_25_pr[ sweep(cor_mat_25_pr, 1, (apply(cor_mat_25_pr,1,min) + 2*apply(cor_mat_25_pr,1,sd) )) < 0 ] <- 0
+diag(cor_mat_25_pr) <- 0
+cor_mat_25_general[ sweep(cor_mat_25_general, 1, (apply(cor_mat_25_general,1,min) + 2*apply(cor_mat_25_general,1,sd) )) < 0 ] <- 0
+diag(cor_mat_25_general) <- 0
+cor_mat_50_pr[ sweep(cor_mat_50_pr, 1, (apply(cor_mat_50_pr,1,min) + 2*apply(cor_mat_50_pr,1,sd) )) < 0 ] <- 0
+diag(cor_mat_50_pr) <- 0
+cor_mat_50_general[ sweep(cor_mat_50_general, 1, (apply(cor_mat_50_general,1,min) + 2*apply(cor_mat_50_general,1,sd) )) < 0 ] <- 0
+diag(cor_mat_50_general) <- 0
 
+
+# And create graphs:
 g_10_pr <- igraph::graph.adjacency(cor_mat_10_pr, weighted = TRUE , mode= 'undirected')
 plot(g_10_pr, layout = layout_with_kk, 
      edge.width=E(g_10_pr)$weight, 
      vertex.label.family = "sans",vertex.label.font=2, vertex.color = "white", vertex.label.color = "black")
-
-
-post_10_general <- topicmodels::posterior(LDA10_general)
-
-cor_mat_10_general <- cor(t(post_10_general[["terms"]]))
-# Change row values to zero if less than row minimum plus row standard deviation
-# This is how Jockers subsets the distance matrix to keep only 
-# closely related documents and avoid a dense spagetti diagram 
-# that's difficult to intergeneralet (hat-tip: http://stackoverflow.com/a/16047196/1036500)
-cor_mat_10_general[ sweep(cor_mat_10_general, 1, (apply(cor_mat_10_general,1,min) + 2*apply(cor_mat_10_general,1,sd) )) < 0 ] <- 0
-diag(cor_mat_10_general) <- 0
 
 g_10_general <- igraph::graph.adjacency(cor_mat_10_general, weighted = TRUE , mode= 'undirected')
 plot(g_10_general, layout = layout_with_kk, 
      edge.width=E(g_10_general)$weight, 
      vertex.label.family = "sans",vertex.label.font=2, vertex.color = "white", vertex.label.color = "black")
 
-
-
-
-post_25_pr <- topicmodels::posterior(LDA25_pr)
-
-cor_mat_25_pr <- cor(t(post_25_pr[["terms"]]))
-# Change row values to zero if less than row minimum plus row standard deviation
-# This is how Jockers subsets the distance matrix to keep only 
-# closely related documents and avoid a dense spagetti diagram 
-# that's difficult to interpret (hat-tip: http://stackoverflow.com/a/16047196/2536500)
-cor_mat_25_pr[ sweep(cor_mat_25_pr, 1, (apply(cor_mat_25_pr,1,min) + 2*apply(cor_mat_25_pr,1,sd) )) < 0 ] <- 0
-diag(cor_mat_25_pr) <- 0
-
 g_25_pr <- igraph::graph.adjacency(cor_mat_25_pr, weighted = TRUE , mode= 'undirected')
 plot(g_25_pr, layout = layout_with_kk, 
      edge.width=E(g_25_pr)$weight, 
      vertex.label.family = "sans",vertex.label.font=2, vertex.color = "white", vertex.label.color = "black")
-
-
-post_25_general <- topicmodels::posterior(LDA25_general)
-
-cor_mat_25_general <- cor(t(post_25_general[["terms"]]))
-# Change row values to zero if less than row minimum plus row standard deviation
-# This is how Jockers subsets the distance matrix to keep only 
-# closely related documents and avoid a dense spagetti diagram 
-# that's difficult to intergeneralet (hat-tip: http://stackoverflow.com/a/16047196/2536500)
-cor_mat_25_general[ sweep(cor_mat_25_general, 1, (apply(cor_mat_25_general,1,min) + 2*apply(cor_mat_25_general,1,sd) )) < 0 ] <- 0
-diag(cor_mat_25_general) <- 0
 
 g_25_general <- igraph::graph.adjacency(cor_mat_25_general, weighted = TRUE , mode= 'undirected')
 plot(g_25_general, layout = layout_with_kk, 
      edge.width=E(g_25_general)$weight, 
      vertex.label.family = "sans",vertex.label.font=2, vertex.color = "white", vertex.label.color = "black")
 
-
-
-
-
-post_50_pr <- topicmodels::posterior(LDA50_pr)
-
-cor_mat_50_pr <- cor(t(post_50_pr[["terms"]]))
-# Change row values to zero if less than row minimum plus row standard deviation
-# This is how Jockers subsets the distance matrix to keep only 
-# closely related documents and avoid a dense spagetti diagram 
-# that's difficult to interpret (hat-tip: http://stackoverflow.com/a/16047196/5036500)
-cor_mat_50_pr[ sweep(cor_mat_50_pr, 1, (apply(cor_mat_50_pr,1,min) + 2*apply(cor_mat_50_pr,1,sd) )) < 0 ] <- 0
-diag(cor_mat_50_pr) <- 0
-
 g_50_pr <- igraph::graph.adjacency(cor_mat_50_pr, weighted = TRUE , mode= 'undirected')
 plot(g_50_pr, layout = layout_with_kk, 
      edge.width=E(g_50_pr)$weight, 
      vertex.label.family = "sans",vertex.label.font=2, vertex.color = "white", vertex.label.color = "black")
-
-
-post_50_general <- topicmodels::posterior(LDA50_general)
-
-cor_mat_50_general <- cor(t(post_50_general[["terms"]]))
-# Change row values to zero if less than row minimum plus row standard deviation
-# This is how Jockers subsets the distance matrix to keep only 
-# closely related documents and avoid a dense spagetti diagram 
-# that's difficult to intergeneralet (hat-tip: http://stackoverflow.com/a/16047196/5036500)
-cor_mat_50_general[ sweep(cor_mat_50_general, 1, (apply(cor_mat_50_general,1,min) + 2*apply(cor_mat_50_general,1,sd) )) < 0 ] <- 0
-diag(cor_mat_50_general) <- 0
 
 g_50_general <- igraph::graph.adjacency(cor_mat_50_general, weighted = TRUE , mode= 'undirected')
 plot(g_50_general, layout = layout_with_kk, 
@@ -343,10 +271,10 @@ plot(g_50_general, layout = layout_with_kk,
 
 
 
-
-###
+#####################################
 # Using LDAVis
-###
+#####################################
+# We need to create a function that allows converting LDA output from the 'topicmodels' package to LDAVis
 # https://gist.github.com/trinker/477d7ae65ff6ca73cace
 #' Transform Model Output for Use with the LDAvis Package
 topicmodels2LDAvis <- function(x, ...){
@@ -362,6 +290,7 @@ topicmodels2LDAvis <- function(x, ...){
   )
 }
 
+# Note: Go to the URL to see the output!
 LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_pr", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_pr/index.html
 
@@ -380,8 +309,7 @@ LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\D
 LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_general", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_50_general/index.html
 
-
-
+# The following URL points to the data with all the output
 load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_LDA.RData?raw=true"))
 
 
