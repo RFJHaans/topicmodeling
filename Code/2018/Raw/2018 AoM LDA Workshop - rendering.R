@@ -1,6 +1,18 @@
 #########################################
 ### Package installation
 #########################################
+# The "tm" package enables the text mining infrastructure that we will use for LDA.
+if (!require("tm")) install.packages("tm")
+
+# The "topicmodels" package enables LDA analysis.
+if (!require("topicmodels")) install.packages("topicmodels")
+
+# The "LDAVis" package enables visualization from the LDA analysis.
+if (!require("LDAVis")) install.packages("LDAVis")
+
+# The "igraph" package enables creation of networks.
+if (!require("igraph")) install.packages("igraph")   
+
 # The following command loads the required packages.
 library(topicmodels)
 library(tm)
@@ -73,14 +85,16 @@ highfreq50_general <- findFreqTerms(dtm_general,50,Inf)
 smalldtm_50w_pr <- DocumentTermMatrix(corpusclean_pr, control=list(dictionary = highfreq50_pr))
 smalldtm_50w_general <- DocumentTermMatrix(corpusclean_general, control=list(dictionary = highfreq50_general))
 
+
+# The following loads the data after processing via the above steps:
+load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_preTM.RData?raw=true"))
+
+
 #########################################
 ### LDA: Running the model
 #########################################
 # We first fix the random seed for future replication.
 SEED <- 123456789
-
-# The following loads the data after processing via the above steps:
-load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_preTM.RData?raw=true"))
 
 #########################################
 # 10 Topics
@@ -164,7 +178,7 @@ topics_LDA50_general
 
 
 #########################################
-# Getting more precise matrices for rendering
+# Getting more precise (document-topic / term-topic) matrices to be used in rendering
 # Document-topic matrices
 documents_LDA10_pr <- as.data.frame(LDA10_pr@gamma) 
 documents_LDA10_general <- as.data.frame(LDA10_general@gamma) 
