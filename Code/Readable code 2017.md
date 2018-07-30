@@ -46,10 +46,10 @@ url.show("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2017%2
 
 ```Rscript
 ### Load the output of the 200-topic model (we cannot run it during the workshop due to time constraints). 
-load(url("https://github.com/RFJHaans/topicmodeling/blob/master/LDA200.RData?raw=true"))
+load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/LDA200.RData?raw=true"))
 
 ### Load data from a URL
-    data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/ASQ_AMJ_AMR_OS_SMJ.csv"))
+    data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Data/ASQ_AMJ_AMR_OS_SMJ.csv"))
 
 ### Create a corpus. 
     corpus = VCorpus((VectorSource(data[, "AB"])))
@@ -708,13 +708,13 @@ data$SO                            190 191 192 193 194 195 196 197 198 199 200
     bar1 <- barplot(crosstabtable,legend.text =  c("AMJ", "AMR","ASQ","OS","SMJ"),col = c("gray0","gray20","gray60","gray80","gray100"), axisnames=FALSE)
     axis(3,at=bar1,labels=seq(1,200,by=1))
 ```
-![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/alljournals.png)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/alljournals.png)
 ```Rscript
 # We can also check only for the SMJ, for example.
     bar2 <-barplot(crosstabtable["ACADEMY OF MANAGEMENT JOURNAL",], axisnames=FALSE)
     axis(3,at=bar2,labels=seq(1,200,by=1))
 ```
-![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/AMJ.png)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/AMJ.png)
 ```Rscript
 # We can take a similar approach to look at trends over time.
     highest_year = as.data.frame(data$PY)
@@ -724,9 +724,9 @@ data$SO                            190 191 192 193 194 195 196 197 198 199 200
     bar3 <-barplot(crosstabtable_year,legend.text =  c("2011", "2012","2013","2014","2015"),col = c("gray0","gray20","gray60","gray80","gray100"), axisnames=FALSE)
     axis(3,at=bar3,labels=seq(1,200,by=1))
 ```
-![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/years.png)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/years.png)
 ```Rscript
     bar4 <-barplot(crosstabtable[1,], axisnames=FALSE)
     axis(3,at=bar4,labels=seq(1,200,by=1))
 ```
-![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2011.png)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2011.png)
