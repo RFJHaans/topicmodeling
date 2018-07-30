@@ -16,17 +16,17 @@ if (!require("topicmodels")) install.packages("topicmodels")
 
 
 ### Load the output of the 200-topic model (we cannot run it during the workshop due to time constraints). 
-load(url("https://github.com/RFJHaans/topicmodeling/blob/master/LDA200.RData?raw=true"))
+load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/LDA200.RData?raw=true"))
 
 ### And open the R code of this workshop (needs to be copy-pasted into an R script after loading):
-url.show("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/2017%20AoM%20LDA%20Workshop%20-%20abstracts.R")
+url.show("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Data/2017%20AoM%20LDA%20Workshop%20-%20abstracts.R")
 
 
 #########################################
 ### Get the data, turn into a corpus, and clean it up
 #########################################
 # Load data from a URL
-data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/ASQ_AMJ_AMR_OS_SMJ.csv"))
+data = read.csv(url("https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Data/ASQ_AMJ_AMR_OS_SMJ.csv"))
 
 # Create a corpus. 
 corpus = VCorpus((VectorSource(data[, "AB"])))
