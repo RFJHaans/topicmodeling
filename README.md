@@ -5,8 +5,8 @@ This page was specifically designed for the workshop on topic modeling that took
 but is open to anyone interested. 
 
 Links to the code:
-<li>View a formatted version of the code of the 2017 PDW (discussing basic data loading, cleaning, and models)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md">here</a>
-<li>View a formatted version of the code of the 2018 PDW (running a basic modeling and showing various rendering tools)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md">here</a>
+<li>View a formatted version of the code of the 2017 PDW (discussing basic data loading, cleaning, and models)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md"> here</a>
+<li>View a formatted version of the code of the 2018 PDW (running a basic modeling and showing various rendering tools)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md"> here</a>
   
 Key articles
 =====================
