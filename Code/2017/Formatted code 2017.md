@@ -18,6 +18,7 @@ if (!require("topicmodels")) install.packages("topicmodels")
 
 These will install the two core packages that we will use in the workshop, and their installation may take some time on the standard conference internet connection. After this is done, you're all set to participate in the workshop! It is also possible to run the code shown below at home beforehand, but note that the actual topic model takes a LONG time to finish on most PCs. 
 
+You can install packages by entering them to your script (you can start a new script on Windows via "Shift+Ctrl+N" or by navigating to "File" --> "New File" --> "R Script". You can run code by selecting the code and pressing "Ctrl + Enter" or the "Run" button at the top of the script window. Packages can also be installed by navigating to "Packages" (which should be on the right half of your screen), or by selecting "Tools" at the top of your screen and selecting "Install packages" from there.
 
 Workshop example
 =====================
