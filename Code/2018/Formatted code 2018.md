@@ -13,16 +13,19 @@ You can download the free version of RStudio on <a href="https://www.rstudio.com
 Then, after these steps are completed, it is advisable to run the following two lines of code in RStudio before coming to the workshop. 
 ```Rscript
 # The "tm" package enables the text mining infrastructure that we will use for LDA.
-    if (!require("tm")) install.packages("tm")
+if (!require("tm")) install.packages("tm")
 
 # The "topicmodels" package enables LDA analysis.
-    if (!require("topicmodels")) install.packages("topicmodels")
+if (!require("topicmodels")) install.packages("topicmodels")
 
 # The "LDAVis" package enables visualization from the LDA analysis.
-    if (!require("LDAVis")) install.packages("LDAVis")
-    
+if (!require("LDAVis")) install.packages("LDAVis")
+
+# The "servr" is used by LDAVis.
+if (!require("servr")) install.packages("servr")
+
 # The "igraph" package enables creation of networks.
-    if (!require("igraph")) install.packages("igraph")  
+if (!require("igraph")) install.packages("igraph")    
 ```
 
 These will install the core packages that we will use in the workshop, and their installation may take some time on the standard conference internet connection. After this is done, you're all set to participate in the workshop! It is also possible to run the code shown below at home beforehand, but note that the actual topic model takes a LONG time to finish on most PCs. 
@@ -686,15 +689,15 @@ topicmodels2LDAvis <- function(x, ...){
   )
 }
 
-LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_pr", open.browser = FALSE)
+LDAvis::serVis(topicmodels2LDAvis(LDA10_pr), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_pr", open.browser = FALSE)
 
 LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_general", open.browser = FALSE)
 
-LDAvis::serVis(topicmodels2LDAvis(LDA25_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_pr", open.browser = FALSE)
+LDAvis::serVis(topicmodels2LDAvis(LDA25_pr), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_pr", open.browser = FALSE)
 
 LDAvis::serVis(topicmodels2LDAvis(LDA25_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_general", open.browser = FALSE)
 
-LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_pr", open.browser = FALSE)
+LDAvis::serVis(topicmodels2LDAvis(LDA50_pr), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_pr", open.browser = FALSE)
 
 LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_general", open.browser = FALSE)
 

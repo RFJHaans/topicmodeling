@@ -10,6 +10,9 @@ if (!require("topicmodels")) install.packages("topicmodels")
 # The "LDAVis" package enables visualization from the LDA analysis.
 if (!require("LDAVis")) install.packages("LDAVis")
 
+# The "servr" is used by LDAVis.
+if (!require("servr")) install.packages("servr")
+
 # The "igraph" package enables creation of networks.
 if (!require("igraph")) install.packages("igraph")   
 
@@ -18,6 +21,7 @@ library(topicmodels)
 library(tm)
 library(LDAvis)
 library(igraph)
+library(servr)
 
 #########################################
 ### Data loading
@@ -305,19 +309,19 @@ topicmodels2LDAvis <- function(x, ...){
 }
 
 # Note: Go to the URL to see the output!
-LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_pr", open.browser = FALSE)
+LDAvis::serVis(topicmodels2LDAvis(LDA10_pr), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_pr", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_pr/index.html
 
 LDAvis::serVis(topicmodels2LDAvis(LDA10_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_10_general", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_general/index.html
 
-LDAvis::serVis(topicmodels2LDAvis(LDA25_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_pr", open.browser = FALSE)
+LDAvis::serVis(topicmodels2LDAvis(LDA25_pr), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_pr", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_pr/index.html
 
 LDAvis::serVis(topicmodels2LDAvis(LDA25_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_25_general", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_general/index.html
 
-LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_pr", open.browser = FALSE)
+LDAvis::serVis(topicmodels2LDAvis(LDA50_pr), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_pr", open.browser = FALSE)
 # http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_50_pr/index.html
 
 LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\Documents\\GitHub\\topicmodeling\\Output\\2018\\LDAVis\\vis_50_general", open.browser = FALSE)
