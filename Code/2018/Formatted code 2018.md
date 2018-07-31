@@ -711,27 +711,27 @@ You can access interactive versions of the images below by clicking the figure t
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_pr/index.html">10-topic PR</a>  
-![](https://github.com/RFJHaans/topicmodeling/tree/master/Output/2018/LDAVis/10_pr.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/10_general.PNG)
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_general/index.html">10-topic General</a>  
-![](https://github.com/RFJHaans/topicmodeling/tree/master/Output/2018/LDAVis/10_general.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/10_general.PNG)
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_pr/index.html">25-topic PR</a>  
-![](https://github.com/RFJHaans/topicmodeling/tree/master/Output/2018/LDAVis/25_pr.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/25_pr.PNG)
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_general/index.html">25-topic General</a>  
-![](https://github.com/RFJHaans/topicmodeling/tree/master/Output/2018/LDAVis/25_general.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/25_general.PNG)
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_50_pr/index.html">50-topic PR</a>  
-![](https://github.com/RFJHaans/topicmodeling/tree/master/Output/2018/LDAVis/50_pr.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/50_pr.PNG)
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_50_general/index.html">50-topic General</a>  
-![](https://github.com/RFJHaans/topicmodeling/tree/master/Output/2018/LDAVis/50_general.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/50_general.PNG)
 
 
 ### The following URL points to the data with all the output
