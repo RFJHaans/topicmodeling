@@ -122,7 +122,7 @@ load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_p
 ```
 
 ### LDA: Running the model
-Please see the PDW from last year for some more information on the basic models.
+Please see the PDW from last year for some more information on the basic models.  It can be found <a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md">here</a> 
 ```Rscript
 # We first fix the random seed for future replication.
 SEED <- 123456789
