@@ -711,7 +711,7 @@ You can access interactive versions of the images below by clicking the figure t
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_pr/index.html">10-topic PR</a>  
-![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/10_general.PNG)
+![](https://raw.githubusercontent.com/RFJHaans/topicmodeling/master/Output/2018/LDAVis/10_pr.PNG)
 
 
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_general/index.html">10-topic General</a>  
