@@ -4,32 +4,13 @@ In order to follow the code developed for the workshop (shown in full below unde
 
 Before running the code shown below, install R on your system by going to the following page:
 https://cran.r-project.org/
-Here, OS-specific versions of R can be found. For example, by clicking <a href="https://cran.r-project.org/bin/windows/base/">here</a>, you can download the executable for Windows. Installation using the default settings should do the trick.
+Here, OS-specific versions of R can be found. For example, by clicking <a href="https://cran.r-project.org/bin/windows/base/">here</a>, you can download the executable for Windows. For Mac OS X, the install file can be found <a href="https://cran.r-project.org/bin/macosx/">here</a>. Installation using the default settings should do the trick.
 
 Then, after the installation of R is complete, navigate to the following page:
 https://www.rstudio.com/
 You can download the free version of RStudio on <a href="https://www.rstudio.com/products/rstudio/download/">this page</a>. Again, the default settings should do the trick.
 
 Then, after these steps are completed, it is advisable to run the following two lines of code in RStudio before coming to the workshop. 
-```Rscript
-if (!require("tm")) install.packages("tm")
-if (!require("topicmodels")) install.packages("topicmodels")
-```
-
-These will install the two core packages that we will use in the workshop, and their installation may take some time on the standard conference internet connection. After this is done, you're all set to participate in the workshop! It is also possible to run the code shown below at home beforehand, but note that the actual topic model takes a LONG time to finish on most PCs. 
-
-
-2018 Workshop example
-=====================
-Texts on electric vehicles: 2005-2014.
--------------------
-Code tested and written for R version 3.5.1, tm package version 0.7-4, topicmodels package version 0.2-7, igraph version 1.2.1., and LDAVis version 0.3.2.
-
-Code prepared on July 30, 2018 by Richard Haans (haans@rsm.nl).
-Data obtained from Hovig Tchalian, used with permission. 
-
-### Package installation
-
 ```Rscript
 # The "tm" package enables the text mining infrastructure that we will use for LDA.
     if (!require("tm")) install.packages("tm")
@@ -41,9 +22,25 @@ Data obtained from Hovig Tchalian, used with permission.
     if (!require("LDAVis")) install.packages("LDAVis")
     
 # The "igraph" package enables creation of networks.
-    if (!require("igraph")) install.packages("igraph")   
-    
-    
+    if (!require("igraph")) install.packages("igraph")  
+```
+
+These will install the core packages that we will use in the workshop, and their installation may take some time on the standard conference internet connection. After this is done, you're all set to participate in the workshop! It is also possible to run the code shown below at home beforehand, but note that the actual topic model takes a LONG time to finish on most PCs. 
+
+You can install packages by entering them to your script (you can start a new script on Windows via "Shift+Ctrl+N" or by navigating to "File" --> "New File" --> "R Script". You can run code by selecting the code and pressing "Ctrl + Enter" or the "Run" button at the top of the script window. Packages can also be installed by navigating to "Packages" (which should be on the right half of your screen), or by selecting "Tools" at the top of your screen and selecting "Install packages" from there.
+
+2018 Workshop example
+=====================
+Texts on electric vehicles: 2005-2014.
+-------------------
+Code tested and written for R version 3.5.1, tm package version 0.7-4, topicmodels package version 0.2-7, igraph version 1.2.1., and LDAVis version 0.3.2.
+
+Code prepared on July 30, 2018 by Richard Haans (haans@rsm.nl).
+Data obtained from Hovig Tchalian, used with permission. 
+
+### Loading packages
+
+```Rscript
 # The following command loads the required packages.
 library(topicmodels)
 library(tm)
@@ -52,7 +49,7 @@ library(igraph)
 ```
 
 ### Get the data, turn into a corpus, and clean it up
-For more information with regards to cleaning, please see the PDW from last year. 
+For more information with regards to cleaning, please see the PDW from last year. It can be found <a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md">here</a> 
 
 ```Rscript
 #########################################
@@ -1169,6 +1166,8 @@ LDAvis::serVis(topicmodels2LDAvis(LDA50_general), out.dir = "C:\\Users\\rfjha\\D
 load(url("https://github.com/RFJHaans/topicmodeling/blob/master/Data/2018/Data_LDA.RData?raw=true"))
 
 ```
+Please see <a href="http://www.aclweb.org/anthology/W14-3110">this</a> paper for more information on this visualization (Sievert and Shirley, 2014). 
+
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_pr/index.html">10-topic PR</a>  
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_10_general/index.html">10-topic General</a>  
 <a href="http://htmlpreview.github.com/?https://github.com/RFJHaans/topicmodeling/blob/master/Output/2018/LDAVis/vis_25_pr/index.html">25-topic PR</a>  
