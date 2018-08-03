@@ -1,15 +1,20 @@
 Topic Modeling Hub
 ============
 This is a repository for literature on and applications of the topic modeling methodology. 
-This page was specifically designed for the workshops on topic modeling that took place at the 2017 and 2018 Academy of Management Meeting, 
-but is open to anyone interested. 
+This page was specifically designed for the workshops on topic modeling that took place at the 2017 and 2018 Academy of Management Meeting, but is open to anyone interested. 
 
 Please see <a href="https://github.com/RFJHaans/topicmodeling/blob/master/Output/Other/Getting%20code%20into%20R.md"> this</a> page for a step-by-step overview of using this Github page. 
 
 Links to the code:
 <li>View a formatted version of the code of the 2017 PDW (discussing basic data loading, cleaning, and models)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md"> here</a>
 <li>View a formatted version of the code of the 2018 PDW (running a basic model and showing various rendering tools)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2018/Formatted%20code%202018.md"> here</a>
-  
+
+Much of the ideas on this page are closely intertwined with ongoing work with the organizers of the PDW, most recently expressed in our draft article prepared for the Academy of Management Annals. The abstract of this working draft can be found below. Please contact me (haans@rsm.nl) if you are interested in receiving a copy. 
+
+TOPIC MODELS IN MANAGEMENT RESEARCH: RENDERING NEW THEORY FROM BIG TEXTUAL DATA
+Topic modeling, a new method borrowed from computer science by management researchers, enables the processing of big (and small) textual data to help create phenomenon-based constructs and grounded conceptual relationships. In our review, we discuss precursors to topic modeling (particularly content analysis), introduce a framework for combining topic modeling analysis with theory building, examine applications of topic modeling in management research, and highlight new trends in topic modeling. Topic modeling risks being treated simply as a black-box technique that produces algorithm-generated topics from raw data, but we argue that it is most usefully understood in the context of a process for rendering constructs and conceptual relationships by combining analysis and theory. Using the rendering process as a lens enables us to categorize and evaluate the burgeoning body of topic modeling-based research articles in management and elaborate their contributions in domains ranging from framing and coherence analysis to detecting novelty and making sense of online audiences. Our goal is not only to link topic modeling method with theory building transparently, but also to engage a broader group of scholars with the topic modeling community by demonstrating topic modeling’s flexible uses. 
+
+
 Key articles
 =====================
 Method
