@@ -5,7 +5,7 @@ This page was specifically designed for the workshops on topic modeling that too
 
 Please see <a href="https://github.com/RFJHaans/topicmodeling/blob/master/Output/Other/Getting%20code%20into%20R.md"> this</a> page for a step-by-step overview of using this Github page. 
 
-The set of slides from the various presentations during the 2018 PDW can be found <a href="https://docs.google.com/viewer?url=https://github.com/RFJHaans/topicmodeling/raw/master/AoM-PDW-TModel_18_all_v3_.pdf">here</a>.
+The set of slides from the various presentations during the 2018 PDW can be found <a href="https://docs.google.com/viewer?url=https://github.com/RFJHaans/topicmodeling/raw/master/AoM-PDW-TModel_18_all_v3_1.pdf">here</a>.
 
 Links to the code:
 <li>View a formatted version of the code of the 2017 PDW (discussing basic data loading, cleaning, and models)<a href="https://github.com/RFJHaans/topicmodeling/blob/master/Code/2017/Formatted%20code%202017.md"> here</a>
